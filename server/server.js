@@ -12,8 +12,9 @@ app.use(express.json());
 app.use(cors());
 
 //db connection
+const uri=`${process.env.MONGO_URI}/E-healthcare}`
 mongoose
-  .connect(process.env.MONGO_URI + "/E-healthcare")
+  .connect(uri)
   .then(() => console.log(`connected to MongoDB on ${process.env.MONGO_URI}`))
   .catch((err) => console.log(err));
 
