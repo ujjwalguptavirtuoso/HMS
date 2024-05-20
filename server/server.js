@@ -2,8 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import {config} from "dotenv";
-config();
+import {errorMiddleware} from './middlewares/errorMiddleware'
 
+config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -24,7 +25,10 @@ app.get("/", (req, res) =>
   res.json({ message: "Welcome to the root of the server" })
 );
 
+//error-middleware
+app.use(errorMiddleware)
+
 //server
 app.listen(PORT, () =>
-  console.log(`server is running on http://localhost:${PORT}`)
+  console.log(`server is running on the link: http://localhost:${PORT}`)
 );
