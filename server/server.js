@@ -30,5 +30,5 @@ app.use(errorMiddleware)
 
 //server
 app.listen(PORT, () =>
-  console.log(`server is running on the link: http://localhost:${PORT}`)
+  console.log(`server is running on http://localhost:${PORT}`)
 );
