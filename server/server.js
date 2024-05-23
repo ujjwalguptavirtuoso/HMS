@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import {config} from "dotenv";
-import { errorMiddleware } from "./middlewares/errorMiddleware";
+import {errorMiddleware } from "./middlewares/error.middlewares";
 
 config();
 const app = express();
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json({limit: "32kb"}));
 app.use(cors({
   origin: process.env.CORS_ORIGIN,
-  credentials: true
+  // credentials: true
 }));
 
 //db connection

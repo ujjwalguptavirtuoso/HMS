@@ -44,4 +44,4 @@ const errorMiddleware = (err, req, res, next) => {
   return res.status(err.status).json({succes: false, message: errorMessage});
 };
 
-export default {errorMiddleware}
+export {errorMiddleware}
