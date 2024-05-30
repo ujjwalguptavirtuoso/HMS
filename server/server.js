@@ -2,7 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import {config} from "dotenv";
-import {errorMiddleware } from "./middlewares/error.middlewares";
+import {errorMiddleware } from "./middlewares/error.middlewares.js";
+import userRouter from "./routes/user.routes.js";
 
 config();
 const app = express();
@@ -17,7 +18,7 @@ app.use(cors({
 }));
 
 //db connection
-const uri = `${process.env.MONGO_URI}/E-healthcare}`;
+const uri = `${process.env.MONGO_URI}/E-healthcare`;
 mongoose
   .connect(uri)
   .then(() => console.log(`connected to MongoDB on: ${mongoose.connection.host}`))
@@ -30,6 +31,7 @@ mongoose
 app.get("/", (req, res) =>
   res.json({ message: "Welcome to the root of the server" })
 );
+app.use("/api/v1/users",userRouter);
 
 //error-middleware
 app.use(errorMiddleware)

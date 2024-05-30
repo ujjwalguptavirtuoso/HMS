@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 const userSchema= new mongoose.Schema(
     {
@@ -19,13 +25,18 @@ const userSchema= new mongoose.Schema(
         email:{
             type:String,
             required:true,
-            minLength: [validator.isEmail, "Please Provide A Valid Email!"]
+            // minLength: [validator.isEmail, "Please Provide A Valid Email!"],
+            unique: true
         },
         phone:{
             type:String,
             required:true,
             minLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
             maxLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
+            unique: true
+        },
+        avatar:{
+            type:String,
         },
         nic:{
             type:String,
@@ -48,20 +59,23 @@ const userSchema= new mongoose.Schema(
             select:false,
             minLength:[8, "Password Must Contain 8 Characters!"]
         },
+        refreshToken:{
+            type:String,
+        },
         role:{
             type:String,
             required: true,
-            enum: ["Admin", "Patient"]
+            enum: ["Admin", "Patient","Doctor"]
         },
         doctorDepartment:{
             type: String,
 
         },
-        docAvatar:{
+        avatar:{
             public_id:String,
             url:String
         },
-    }
+    },
 );
 
 userSchema.pre("save", async function(next){
@@ -70,9 +84,19 @@ userSchema.pre("save", async function(next){
             next();
         }
         this.password=await bcrypt.hash(this.password, 10);
+        next();
 });
 
-userSchema.methods.comparePassword=async function (enteredPassword)
+userSchema.methods.comparePassword= async function (enteredPassword)
 {
     return await bcrypt.compare(enteredPassword, this.password);
 }
+
+userSchema.methods.generateJsonWebToken = async function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES,
+  });
+};
+
+export const User=mongoose.model("User",userSchema);
+// const User=mongoose.model(userSchema);
