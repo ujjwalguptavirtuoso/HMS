@@ -35,9 +35,9 @@ const userSchema= new mongoose.Schema(
             maxLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
             unique: true
         },
-        avatar:{
-            type:String,
-        },
+        // avatar:{
+        //     type:String,
+        // },
         nic:{
             type:String,
             required:true,
@@ -92,7 +92,7 @@ userSchema.methods.comparePassword= async function (enteredPassword)
     return await bcrypt.compare(enteredPassword, this.password);
 }
 
-userSchema.methods.generateJsonWebToken = async function () {
+userSchema.methods.generateJWT = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES,
   });
