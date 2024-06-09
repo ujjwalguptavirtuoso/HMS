@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import {User} from "../models/user.model.js"
 
 export const isAdminAuthenticated=asyncHandler(async (req,res,next)=>{
+    // console.log(req.cookies)
     const token= req.cookies.adminToken;
     if(!token) return next(new ErrorHandler("Admin is not authenticated", 400));
 
