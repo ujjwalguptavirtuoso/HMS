@@ -16,7 +16,7 @@ const msgSchema=new mongoose.Schema(
         email:{
             type:String,
             required:true,
-            minLength: [validator.isEmail, "Please Provide A Valid Email!"]
+            //minLength: [validator.isEmail, "Please Provide A Valid Email!"]
         },
         phone:{
             type:String,
