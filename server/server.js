@@ -5,7 +5,7 @@ import {config} from "dotenv";
 import {errorMiddleware } from "./middlewares/error.middlewares.js";
 import userRouter from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
-
+import messageRouter from "./routes/msg.routes.js";
 config();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,7 +15,7 @@ app.use(cookieParser(process.env.JWT_SECRET))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({limit: "32kb"}));
 app.use(cors({
-  origin: process.env.CORS_ORIGIN,
+  // origin: process.env.CORS_ORIGIN,
   // credentials: true
 }));
 
@@ -34,6 +34,7 @@ app.get("/", (req, res) =>
   res.json({ message: "Welcome to the root of the server" })
 );
 app.use("/api/v1/users",userRouter);
+app.use("/api/v1/message",messageRouter);
 
 //error-middleware
 app.use(errorMiddleware)
