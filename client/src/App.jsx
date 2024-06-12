@@ -7,6 +7,7 @@ import Appointment from "./Pages/Appointment";
 import About from "./Pages/About";
 import QuickHelp from "./Pages/QuickHelp";
 import DiabetesPredictor from "./Pages/DiabetesPredictor";
+import ThyroidPredictor from "./Pages/ThyroidPredictor";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/aboutus" element={<About />} />
           <Route path="/quick-help" element={<QuickHelp />} />
           <Route path="/diabetes-predictor" element={<DiabetesPredictor />} />
+          <Route path="/thyroid-predictor" element={<ThyroidPredictor />} />
         </Routes>
         <ToastContainer position="top-center" />
       </Router>
