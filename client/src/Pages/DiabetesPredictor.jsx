@@ -29,20 +29,53 @@ const DiabetesPredictor = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://127.0.0.1:5000/predict", {
+
+    // Convert form data to numeric values as needed
+    const genderNumeric = formData.gender === "male" ? 0 : formData.gender === "female" ? 1 : 2;
+    const hypertensionNumeric = formData.hypertension === "yes" ? 1 : 0;
+    const heartNumeric = formData.heartDisease === "yes" ? 1 : 0;
+    let smokingNumeric;
+    switch (formData.smoking) {
+      case "never":
+        smokingNumeric = 0;
+        break;
+      case "ever":
+        smokingNumeric = 3;
+        break;
+      case "current":
+        smokingNumeric = 1;
+        break;
+      case "not current":
+        smokingNumeric = 2;
+        break;
+    }
+
+    // Prepare the data object to be sent to the backend
+    const preparedData = {
+      gender: genderNumeric,
+      age: parseInt(formData.age),
+      hypertension: hypertensionNumeric,
+      heart_disease: heartNumeric,
+      smoking_history: smokingNumeric,
+      bmi: parseFloat(formData.bmi),
+      HbA1c_level: parseFloat(formData.hbg4),
+      blood_glucose_level: parseFloat(formData.glucose),
+    };
+
+
+    fetch("http://localhost:5000/predict", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(preparedData),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Prediction result:", data);
-        setPredictionResult("Predicted Result: High Risk");
-        setRecommendation(
-          "Recommendation: Consult a doctor for further advice."
-        );
+        setPredictionResult("Predicted Result: " + data.prediction);
+        setRecommendation("Recommendation: " + data.recommendation);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -244,6 +277,7 @@ const DiabetesPredictor = () => {
             {recommendation}
           </div>
         )}
+        {/* {alert(predictionResult)} */}
       </div>
     </>
   );
