@@ -12,13 +12,13 @@ router.route("/login").post(userLogin);
 /*______________________________PATIENT ROUTES_________________________________________*/
 router.route("/patient/register").post(upload.fields([{name: "avatar", maxCount: 1}]), registerPatient);
 router.get("/patient/profile", isPatientAuthenticated, getUserDetails);
-router.get("/patient/logout", isPatientAuthenticated, logoutPatient);
+router.get("/patient/logout", logoutPatient);
 
 
 /*______________________________ADMIN ROUTES___________________________________________*/
 router.post("/admin/register", registerAdmin);
 router.get("/admin/profile", isAdminAuthenticated, getUserDetails);
-router.get("/admin/logout", isAdminAuthenticated, logoutAdmin);
+router.get("/admin/logout", logoutAdmin);
 
 // Get all admins
 router.get("/admin/",getAllAdmins);
@@ -36,7 +36,7 @@ router.delete("/admin/:id", isAdminAuthenticated, deleteAdmin);
 router.get("/doctors", getAllDoctors);
 router.route("/doctor/register").post(upload.fields([{name: "avatar", maxCount: 1}]),registerDoctor);
 router.get("/doctor/profile", isDoctorAuthenticated, getUserDetails)
-router.get("/doctor/logout", isDoctorAuthenticated, logoutDoctor)
+router.get("/doctor/logout", logoutDoctor)
 
 
 export default router;
