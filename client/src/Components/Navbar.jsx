@@ -13,10 +13,12 @@ export const Navbar = () => {
     await axios
       .get("http://localhost:8000/api/v1/users/patient/logout", {
         //withCredentials: true,
+        headers: { "Content-Type": "application/json" },
       })
       .then((res) => {
         toast.success(res.data.message);
         setIsAuthenticated(false);
+        navigateTo("/");
       })
       .catch((err) => {
         toast.error(err.response.data.message);
