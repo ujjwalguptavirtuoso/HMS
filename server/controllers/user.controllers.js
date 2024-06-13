@@ -4,7 +4,7 @@ import ErrorHandler from "../middlewares/error.middlewares.js";
 import { generateToken } from "../utils/jwtToken.js";
 import { resModel } from "../utils/response.js";
 import validator from "validator";
-// import cloudinary from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 
 const validateStringField = (field, value) => {
   if (typeof value == "string" && value.trim() === "") {
@@ -155,9 +155,22 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
     password,
   });
 
+  const cloudinaryResponse = await cloudinary.uploader.upload(
+    docAvatar.tempFilePath
+  );
+  if (!cloudinaryResponse || cloudinaryResponse.error) {
+    console.error(
+      "Cloudinary Error:",
+      cloudinaryResponse.error || "Unknown Cloudinary error"
+    );
+    return next(
+      new ErrorHandler("Failed To Upload Doctor Avatar To Cloudinary", 500)
+    );
+  }
+
   const isRegistered = await User.findOne({ $or: { email, phone } });
   if (isRegistered) {
-    return next(new ErrorHandler("Admin already Registered!", 400));
+    return next(new ErrorHandler("Doctor already Registered!", 400));
   }
 
   const doc = await User.create({
@@ -169,7 +182,12 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
     dob,
     gender,
     password,
+    doctorDepartment,
     role: "Doctor",
+    docAvatar: {
+      public_id: cloudinaryResponse.public_id,
+      url: cloudinaryResponse.secure_url,
+    },
   });
 
   const payload = await User.findById(doc._id).select(
