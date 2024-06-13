@@ -25,7 +25,7 @@ router.get("/admin/",getAllAdmins);
 // Get admin by ID
 router.get("/admin/:id", isAdminAuthenticated, getAdminById);
 // Create admin
-router.post("/admin/add", isAdminAuthenticated, registerAdmin);
+router.post("/admin/add", registerAdmin);
 // Update admin
 router.put("/admin/:id", isAdminAuthenticated, updateAdmin);
 // Delete admin

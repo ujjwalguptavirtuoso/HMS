@@ -21,22 +21,23 @@ const loginadmin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await axios
-        .post(
-          "http://localhost:8000/api/v1/users/login",
-          { email, password, confirmPassword: password, role: "Admin" },
-          {
-            //withCredentials: true,
-            headers: { "Content-Type": "application/json" },
-          }
-        )
-        .then((res) => {
-          toast.success(res.data.message);
-          setIsAuthenticated(true);
-          navigateTo("/admin");
-          setEmail("");
-          setPassword("");
-        });
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/users/login",
+        { email, password, confirmPassword: password, role: "Admin" },
+        {
+          headers: { "Content-Type": "application/json" },
+          // withCredentials: true,
+        }
+      );
+
+      const { token } = response.data; 
+      localStorage.setItem("authToken", token); // Save the token to localStorage
+
+      toast.success(response.data.message);
+      setIsAuthenticated(true);
+      navigateTo("/admin");
+      setEmail("");
+      setPassword("");
     } catch (error) {
       toast.error(error.response.data.message);
     }
