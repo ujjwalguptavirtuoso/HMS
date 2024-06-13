@@ -1,6 +1,6 @@
 import express from "express"
 import {postAppointment,getAllAppointments,updateAppointmentStatus,deleteAppointment} from "../controllers/appoinment.controllers.js";
-import {isAdminAuthenticated} from "../middlewares/auth.middleware.js";
+import {isAdminAuthenticated, isPatientAuthenticated} from "../middlewares/auth.middleware.js";
 
 const router=express.Router();
 
