@@ -95,7 +95,7 @@ const HeartDiseasePredictor=()=>{
         .then((response) => response.json())
         .then((data)=>{
             console.log("Prediction result:",data);
-            setPredictionResult("Prediction Result:",data.predictionResult);
+            setPredictionResult("Prediction Result:"+data.prediction);
             setRecommendation("Recommendation:", data.recommendation);
         })
         .catch((error)=>{

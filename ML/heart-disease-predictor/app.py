@@ -1,15 +1,24 @@
 from flask import Flask, jsonify, make_response, render_template, request 
 import pickle
-import numpy as np 
+import pandas as pd 
 from flask_cors import CORS
+import logging
 
 # Load Random Forest Classifier model
 fileName='heart-disease-prediction-random-forest-classifier.pkl'
-model=pickle.load(open(fileName, 'rb'))
+
 
 app=Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+
+logging.basicConfig(level=logging.DEBUG)
+
+try:
+    model=pickle.load(open(fileName, 'rb'))
+    app.logger.info("Model loaded successfully")
+except Exception as e:
+    app.logger.error(f"Error loading model: {e}")
 
 @app.route('/')
 def home():
@@ -18,29 +27,44 @@ def home():
 
 @app.route('/heart-disease/predict' , methods=['POST'])
 def predict():
-    if request.method== 'POST':
+    try:
+        data = request.get_json()
+        app.logger.debug(f"Received data: {data}")
 
-        age=int(request.form['age'])
-        sex=request.form.get('sex')
-        cp = request.form.get('cp')
-        trestbps = int(request.form['trestbps'])
-        chol = int(request.form['chol'])
-        fbs = request.form.get('fbs')
-        restecg = int(request.form['restecg'])
-        thalach = int(request.form['thalach'])
-        exang = request.form.get('exang')
-        oldpeak = float(request.form['oldpeak'])
-        slope = request.form.get('slope')
-        ca = int(request.form['ca'])
-        thal = request.form.get('thal')
-
-        data = np.array([[age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal]])
-        my_prediction = model.predict(data)
+        features=[
+             data['age'],
+             data['sex'],
+             data['cp'],
+             data['trestbps'],
+             data['chol'],
+             data['fbs'],
+             data['restecg'],
+             data['thalach'],
+             data['exang'],
+             data['oldpeak'],
+             data['slope'],
+             data['ca'],
+             data['thal']
+        ]
 
         
-        result = 'Yes' if my_prediction[0] == 1 else 'No'
 
-        return make_response(jsonify({'my_prediction': result}))
+        df = pd.DataFrame([features], columns=[
+            'age', 'sex', 'cp', 'trestbps',
+            'chol', 'fbs', 'restecg', 'thalach','exang','oldpeak','slope','ca','thal'
+        ])
+
+        app.logger.debug(f"Data prepared for prediction: {df}")
+        prediction = model.predict(df)
+        result = 'Probability of Heart Disease' if prediction[0] == 1 else 'No Probability of Heart Disease'
     
-    if __name__ == '__main__':
-	    app.run(debug=True)
+       
+        return make_response(jsonify({'prediction': result}))
+    
+    except Exception as e:
+        app.logger.error(f"Error during prediction: {e}")
+        return make_response(jsonify({'error': 'An error occurred during prediction'}), 500)
+    
+
+if __name__ == '__main__':
+    app.run(debug=True)
