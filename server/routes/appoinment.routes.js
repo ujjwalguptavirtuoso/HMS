@@ -1,12 +1,9 @@
 import express from "express"
-import { postAppointment, getAllAppointments, updateAppointmentStatus, deleteAppointment } from "../controllers/appoinment.controllers";
-import {isAdminAuthenticated} from "../middlewares/auth.middleware.js";
+import { postAppointment } from "../controllers/appoinment.controllers";
+// import {};
 
 const router=express.Router();
 
 router.post('/post',postAppointment)
-router.get("/getall", isAdminAuthenticated, getAllAppointments);
-router.put("/update/:id", isAdminAuthenticated, updateAppointmentStatus);
-router.delete("/delete/:id", isAdminAuthenticated, deleteAppointment);
 
 export default router;
