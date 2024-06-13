@@ -29,7 +29,7 @@ def predict():
     try:
         # Parsing the incoming JSON data
         data = request.get_json()
-        app.logger.debug(f"Received data: {data}")
+        app.logger.debug(f"\nReceived data: {data}\n")
 
         # Extracting the features
         features = [
@@ -55,6 +55,7 @@ def predict():
 
         # Predicting the result
         prediction = model.predict(df)
+        app.logger.debug(prediction)
         result = 'Condition Present' if prediction[0] == 1 else 'Condition Not Present'
         
         # Example recommendation logic (this can be customized based on your needs)

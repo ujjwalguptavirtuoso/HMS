@@ -6,6 +6,8 @@ import {errorMiddleware } from "./middlewares/error.middlewares.js";
 import userRouter from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
 import messageRouter from "./routes/msg.routes.js";
+import { v2 as cloudinary } from "cloudinary";
+
 import appointmentRouter from "./routes/appoinment.routes.js"
 config();
 const app = express();
@@ -15,10 +17,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cookieParser(process.env.JWT_SECRET))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({limit: "32kb"}));
-app.use(cors({
-  // origin: process.env.CORS_ORIGIN,
-  // credentials: true
-}));
+app.use(cors());
 
 //db connection
 const uri = `${process.env.MONGO_URI}/E-healthcare`;
@@ -28,6 +27,13 @@ mongoose
   .catch((err) => {
     console.log("Error connecting to MongoDB!!\n",err);
     process.exit(1);
+  });
+
+  //cloudinary init
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
   });
 
 //routes

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {upload} from "../middlewares/multer.middleware.js"
-import {userLogin, registerPatient, registerAdmin, registerDoctor, getAllDoctors, getUserDetails, logoutAdmin, logoutPatient, logoutDoctor} from "../controllers/user.controllers.js";
+import {userLogin, registerPatient, registerAdmin, registerDoctor, getAllDoctors, getUserDetails, logoutAdmin, logoutPatient, logoutDoctor, getAllAdmins, getAdminById, deleteAdmin, updateAdmin} from "../controllers/user.controllers.js";
 import {isAdminAuthenticated, isPatientAuthenticated, isDoctorAuthenticated} from "../middlewares/auth.middleware.js"
 
 const router=Router();
@@ -10,22 +10,33 @@ router.route("/login").post(userLogin);
 
 
 /*______________________________PATIENT ROUTES_________________________________________*/
-router.route("/patient/register").post(upload.fields([{name: "avatar", maxCount: 1}]),registerPatient);
+router.route("/patient/register").post(upload.fields([{name: "avatar", maxCount: 1}]), registerPatient);
 router.get("/patient/profile", isPatientAuthenticated, getUserDetails);
-router.get("/patient/logout", isPatientAuthenticated, logoutPatient);
+router.get("/patient/logout", logoutPatient);
 
 
 /*______________________________ADMIN ROUTES___________________________________________*/
-router.route("/admin/register", isAdminAuthenticated, registerAdmin);
+router.post("/admin/register", registerAdmin);
 router.get("/admin/profile", isAdminAuthenticated, getUserDetails);
-router.get("/admin/logout", isAdminAuthenticated, logoutAdmin);
+router.get("/admin/logout", logoutAdmin);
+
+// Get all admins
+router.get("/admin/",getAllAdmins);
+// Get admin by ID
+router.get("/admin/:id", isAdminAuthenticated, getAdminById);
+// Create admin
+router.post("/admin/add", isAdminAuthenticated, registerAdmin);
+// Update admin
+router.put("/admin/:id", isAdminAuthenticated, updateAdmin);
+// Delete admin
+router.delete("/admin/:id", isAdminAuthenticated, deleteAdmin);
 
 
 /*______________________________DOCTOR ROUTES___________________________________________*/
 router.get("/doctors", getAllDoctors);
-router.route("/doctor/register", isDoctorAuthenticated, registerDoctor);
+router.route("/doctor/register").post(upload.fields([{name: "avatar", maxCount: 1}]),registerDoctor);
 router.get("/doctor/profile", isDoctorAuthenticated, getUserDetails)
-router.get("/doctor/logout", isDoctorAuthenticated, logoutDoctor)
+router.get("/doctor/logout", logoutDoctor)
 
 
 export default router;

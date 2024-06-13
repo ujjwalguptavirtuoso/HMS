@@ -63,7 +63,7 @@ const DiabetesPredictor = () => {
     };
 
 
-    fetch("http://localhost:5000/predict", {
+    fetch("http://localhost:5000/diabetes/predict", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

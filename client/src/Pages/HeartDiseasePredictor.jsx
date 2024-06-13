@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import {Navbar} from "../Components/Navbar";
 
-
 const HeartDiseasePredictor=()=>{
-
     const [formData, setFormData]=useState({
         age:"",
         sex:"",
@@ -69,7 +67,7 @@ const HeartDiseasePredictor=()=>{
         const preparedData={
         age:parseInt(formData.age),
         sex:genderNumeric,
-        chestPainType:chectptypeNumeric,
+        chestPainType: parseInt(chectptypeNumeric),
         restingBloodPressure:parseInt(formData.restingBloodPressure),
         serumCholesterol:parseInt(formData.serumCholesterol),
         fastingBloodSugar:bloodSugarNumeric,

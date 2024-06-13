@@ -9,19 +9,42 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
+  // const handleLogout = async () => {
+  //   await axios
+  //     .get("http://localhost:8000/api/v1/users/patient/logout", {
+  //       //withCredentials: true,
+  //       headers: { "Content-Type": "application/json" },
+  //     })
+  //     .then((res) => {
+  //       console.log(res)
+  //       toast.success(res.data.message);
+  //       setIsAuthenticated(false);
+  //       navigateTo("/");
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.response.data.message);
+  //     });
+  // };
+
   const handleLogout = async () => {
-    await axios
-      .get("http://localhost:8000/api/v1/users/patient/logout", {
-        //withCredentials: true,
-      })
-      .then((res) => {
-        toast.success(res.data.message);
-        setIsAuthenticated(false);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/v1/users/patient/logout",
+        {
+          // withCredentials: true, // Include cookies in the request
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log(res);
+      toast.success(res.data.message);
+      setIsAuthenticated(false);
+      localStorage.removeItem("authToken"); // Remove token from localStorage
+      navigateTo("/login");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Logout failed");
+    }
   };
+
 
   const navigateTo = useNavigate();
 
@@ -36,7 +59,9 @@ export const Navbar = () => {
   return (
     <nav className="w-full h-16 flex justify-between items-center px-5">
       <div className="logo w-10">
-        <Link to={"/"}><img className="ml-10" src="./image.png" alt="" /></Link>
+        <Link to={"/"}>
+          <img className="ml-10" src="./image.png" alt="" />
+        </Link>
       </div>
       <div className="nav-contains w-1/2 text-xl font-sans font-bold">
         <ul className="flex justify-between">
