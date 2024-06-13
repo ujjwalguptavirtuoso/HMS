@@ -2,108 +2,108 @@ import React, { useState } from "react";
 import { Navbar } from "../Components/Navbar";
 
 const HeartDiseasePredictor = () => {
-  const [formData, setFormData] = useState({
-    age: "",
-    sex: "",
-    chestPainType: "",
-    restingBloodPressure: "",
-    serumCholesterol: "",
-    fastingBloodSugar: "",
-    restingECGresults: "",
-    maxHeartRate: "",
-    exerciseInducedAngina: "",
-    stDepression: "",
-    slopeOfPeakExSTsegment: "",
-    numberOfMajorVessels: "",
-    thalassemia: "",
+const [formData, setFormData] = useState({
+  age: "",
+  sex: "",
+  chestPainType: "",
+  restingBloodPressure: "",
+  serumCholesterol: "",
+  fastingBloodSugar: "",
+  restingECGresults: "",
+  maxHeartRate: "",
+  exerciseInducedAngina: "",
+  stDepression: "",
+  slopeOfPeakExSTsegment: "",
+  numberOfMajorVessels: "",
+  thalassemia: "",
+});
+
+const [predictionResult, setPredictionResult] = useState("");
+const [recommendation, setRecommendation] = useState("");
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData({
+    ...formData,
+    [name]: value,
   });
+};
 
-  const [predictionResult, setPredictionResult] = useState("");
-  const [recommendation, setRecommendation] = useState("");
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const genderNumeric = formData.sex === "male" ? 1 : 0;
+  let chectptypeNumeric;
+  if (formData.chestPainType === "typical angina") {
+    chectptypeNumeric = 0;
+  } else if (formData.chestPainType === "atypical angina") {
+    chectptypeNumeric = 1;
+  } else if (formData.chestPainType === "non anginal") {
+    chectptypeNumeric = 2;
+  } else if (formData.chestPainType === "asymptotic") {
+    chectptypeNumeric = 3;
+  }
+
+  const bloodSugarNumeric = formData.fastingBloodSugar === "greater" ? 1 : 0;
+
+  const ecgNumeric =
+    formData.restingECGresults === "normal"
+      ? 0
+      : formData.restingECGresults === "abnormal"
+      ? 1
+      : 2;
+
+  const exerciseanNumeric = formData.exerciseInducedAngina === "yes" ? 1 : 0;
+
+  const slopeSegment =
+    formData.slopeOfPeakExSTsegment === "upslopping"
+      ? 0
+      : formData.slopeOfPeakExSTsegment === "flat"
+      ? 1
+      : 2;
+
+  const thalaNumeric =
+    formData.thalassemia === "normal"
+      ? 3
+      : formData.thalassemia === "fixed defect"
+      ? 6
+      : 7;
+
+  const preparedData = {
+    age: parseInt(formData.age),
+    sex: genderNumeric,
+    cp: chectptypeNumeric,
+    trestbps: parseInt(formData.restingBloodPressure),
+    chol: parseInt(formData.serumCholesterol),
+    fbs: bloodSugarNumeric,
+    restecg: ecgNumeric,
+    thalach: parseInt(formData.maxHeartRate),
+    exang: exerciseanNumeric,
+    oldpeak: parseFloat(formData.stDepression),
+    slope: slopeSegment,
+    ca: parseInt(formData.numberOfMajorVessels),
+    thal: thalaNumeric,
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const genderNumeric = formData.sex === "male" ? 1 : 0;
-    let chectptypeNumeric;
-    if (formData.chestPainType == "Typical Angina") {
-      chectptypeNumeric = 1;
-    } else if (formData.chestPainType == "Atypical Angina") {
-      chectptypeNumeric = 2;
-    } else if (formData.chestPainType == "Non-anginal Pain") {
-      chectptypeNumeric = 3;
-    } else if (formData.chestPainType == "Asymptomatic") {
-      chectptypeNumeric = 4;
-    }
-
-    const bloodSugarNumeric =
-      formData.fastingBloodSugar === "Greater than 120 mg/dl" ? 1 : 0;
-
-    const ecgNumeric =
-      formData.restingECGresults === "Normal"
-        ? 0
-        : formData.restingECGresults === "Having ST-T wave abnormality"
-        ? 1
-        : 2;
-
-    const exerciseanNumeric = formData.exerciseInducedAngina === "Yes" ? 1 : 0;
-
-    const slopeSegment =
-      formData.slopeOfPeakExSTsegment === "Upslopping"
-        ? 0
-        : formData.slopeOfPeakExSTsegment === "Flat"
-        ? 1
-        : 2;
-
-    const thalaNumeric =
-      formData.thalassemia === "Normal"
-        ? 3
-        : formData.thalassemia === "Fixed Defect"
-        ? 6
-        : 7;
-
-    const preparedData = {
-      age: parseInt(formData.age),
-      sex: genderNumeric,
-      chestPainType: parseInt(chectptypeNumeric),
-      restingBloodPressure: parseInt(formData.restingBloodPressure),
-      serumCholesterol: parseInt(formData.serumCholesterol),
-      fastingBloodSugar: bloodSugarNumeric,
-      restingECGresults: ecgNumeric,
-      maxHeartRate: parseInt(formData.maxHeartRate),
-      exerciseInducedAngina: exerciseanNumeric,
-      stDepression: formData.stDepression,
-      slopeOfPeakExSTsegment: slopeSegment,
-      numberOfMajorVessels: parseInt(formData.numberOfMajorVessels),
-      thalassemia: thalaNumeric,
-    };
-
-    fetch("http://localhost:5000/heart-disease/predict", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(preparedData),
+  fetch("http://localhost:5000/heart-disease/predict", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: JSON.stringify(preparedData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Prediction result:", data);
+      setPredictionResult("Prediction Result: " + data.prediction);
+      setRecommendation("Recommendation: " + data.recommendation);
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Prediction result:", data);
-        setPredictionResult("Prediction Result:" + data.prediction);
-        setRecommendation("Recommendation:", data.recommendation);
-      })
-      .catch((error) => {
-        console.log("ERROR:", error);
-      });
-  };
+    .catch((error) => {
+      console.log("ERROR:", error);
+    });
+};
+
 
   return (
     <>
