@@ -53,6 +53,7 @@ const login = () => {
         { email, password, confirmPassword: password, role: "Patient" },
         {
           headers: { "Content-Type": "application/json" },
+          // withCredentials: true,
         }
       );
 

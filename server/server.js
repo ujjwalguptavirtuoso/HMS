@@ -14,10 +14,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cookieParser(process.env.JWT_SECRET))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({limit: "32kb"}));
-app.use(cors({
-  // origin: process.env.CORS_ORIGIN,
-  // credentials: true
-}));
+app.use(cors());
 
 //db connection
 const uri = `${process.env.MONGO_URI}/E-healthcare`;
