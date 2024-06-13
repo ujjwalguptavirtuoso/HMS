@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import messageRouter from "./routes/msg.routes.js";
 import { v2 as cloudinary } from "cloudinary";
 
+import appointmentRouter from "./routes/appoinment.routes.js"
 config();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -41,6 +42,7 @@ app.get("/", (req, res) =>
 );
 app.use("/api/v1/users",userRouter);
 app.use("/api/v1/message",messageRouter);
+app.use("/api/v1/appoinments", appointmentRouter)
 
 //error-middleware
 app.use(errorMiddleware)
