@@ -8,7 +8,7 @@ const QuickHelp = () => {
       <Navbar />
       <div className="w-full p-10 flex justify-center">
         <QuickHelpCard data={"Diabetes Prediction"} link={"/diabetes-predictor"}/>
-        <QuickHelpCard data={"Heart Disease Prediction"} />
+        <QuickHelpCard data={"Heart Disease Prediction"} link={"/heart-disease-predictor"}/>
         <QuickHelpCard data={"Hypothyroidism Prediction"} link={"/thyroid-predictor"}/>
         <QuickHelpCard data={"Coming Soon"} />
       </div>
