@@ -10,7 +10,7 @@ router.route("/login").post(userLogin);
 
 
 /*______________________________PATIENT ROUTES_________________________________________*/
-router.route("/patient/register").post(upload.fields([{name: "avatar", maxCount: 1}]),registerPatient);
+router.route("/patient/register").post(upload.fields([{name: "avatar", maxCount: 1}]), registerPatient);
 router.get("/patient/profile", isPatientAuthenticated, getUserDetails);
 router.get("/patient/logout", isPatientAuthenticated, logoutPatient);
 

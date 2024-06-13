@@ -67,7 +67,7 @@ const HeartDiseasePredictor=()=>{
         const preparedData={
         age:parseInt(formData.age),
         sex:genderNumeric,
-        chestPainType:chectptypeNumeric,
+        chestPainType: parseInt(chectptypeNumeric),
         restingBloodPressure:parseInt(formData.restingBloodPressure),
         serumCholesterol:parseInt(formData.serumCholesterol),
         fastingBloodSugar:bloodSugarNumeric,

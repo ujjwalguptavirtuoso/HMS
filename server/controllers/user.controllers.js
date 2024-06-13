@@ -3,6 +3,7 @@ import { User } from "../models/user.model.js";
 import ErrorHandler from "../middlewares/error.middlewares.js";
 import { generateToken } from "../utils/jwtToken.js";
 import { resModel } from "../utils/response.js";
+import validator from "validator";
 // import cloudinary from "cloudinary";
 
 const validateStringField = (field, value) => {
