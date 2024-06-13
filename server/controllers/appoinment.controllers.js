@@ -3,7 +3,7 @@ import ErrorHandler from "../middlewares/error.middlewares.js";
 import { Appointment } from "../models/appoinment.model.js";
 import {User} from "../models/user.model.js";
 
-export const postAppointment = asyncHandler(async (req, res, next) => {
+const postAppointment = asyncHandler(async (req, res, next) => {
   const {
     firstName,
     lastName,
@@ -14,8 +14,7 @@ export const postAppointment = asyncHandler(async (req, res, next) => {
     gender,
     appointment_date,
     department,
-    doctor_firstName,
-    doctor_lastName,
+    docName,
     hasVisited,
     address,
   } = req.body;
@@ -29,15 +28,13 @@ export const postAppointment = asyncHandler(async (req, res, next) => {
     !gender ||
     !appointment_date ||
     !department ||
-    !doctor_firstName ||
-    !doctor_lastName ||
+    !docName ||
     !address
   ) {
     return next(new ErrorHandler("Please Fill Full Form!", 400));
   }
   const isConflict = await User.find({
-    firstName: doctor_firstName,
-    lastName: doctor_lastName,
+    doctorName:docName,
     role: "Doctor",
     doctorDepartment: department,
   });
@@ -65,10 +62,7 @@ export const postAppointment = asyncHandler(async (req, res, next) => {
     gender,
     appointment_date,
     department,
-    doctor: {
-      firstName: doctor_firstName,
-      lastName: doctor_lastName,
-    },
+    docName,
     hasVisited,
     address,
     doctorId,
@@ -81,14 +75,14 @@ export const postAppointment = asyncHandler(async (req, res, next) => {
   });
 });
 
-export const getAllAppointments = asyncHandler(async (req, res, next) => {
+ const getAllAppointments = asyncHandler(async (req, res, next) => {
   const appointments = await Appointment.find();
   res.status(200).json({
     success: true,
     appointments,
   });
 });
-export const updateAppointmentStatus = asyncHandler(
+const updateAppointmentStatus = asyncHandler(
   async (req, res, next) => {
     const { id } = req.params;
     let appointment = await Appointment.findById(id);
@@ -106,7 +100,7 @@ export const updateAppointmentStatus = asyncHandler(
     });
   }
 );
-export const deleteAppointment = asyncHandler(async (req, res, next) => {
+ const deleteAppointment = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const appointment = await Appointment.findById(id);
   if (!appointment) {
@@ -118,3 +112,5 @@ export const deleteAppointment = asyncHandler(async (req, res, next) => {
     message: "Appointment Deleted!",
   });
 });
+
+export {postAppointment,getAllAppointments,updateAppointmentStatus,deleteAppointment};

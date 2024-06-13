@@ -26,8 +26,8 @@ const appointmentSchema = new mongoose.Schema({
   nic: {
     type: String,
     required: [true, "NIC Is Required!"],
-    minLength: [13, "NIC Must Contain Only 13 Digits!"],
-    maxLength: [13, "NIC Must Contain Only 13 Digits!"],
+    // minLength: [13, "NIC Must Contain Only 13 Digits!"],
+    // maxLength: [13, "NIC Must Contain Only 13 Digits!"],
   },
   dob: {
     type: Date,
@@ -47,14 +47,10 @@ const appointmentSchema = new mongoose.Schema({
     required: [true, "Department Name Is Required!"],
   },
   doctor: {
-    firstName: {
+    docName: {
       type: String,
       required: [true, "Doctor Name Is Required!"],
-    },
-    lastName: {
-      type: String,
-      required: [true, "Doctor Name Is Required!"],
-    },
+    }
   },
   hasVisited: {
     type: Boolean,
