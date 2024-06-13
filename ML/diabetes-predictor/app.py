@@ -24,7 +24,7 @@ except Exception as e:
 def index():
     return "Welcome to the Diabetes Predictor API"
 
-@app.route('/predict', methods=['POST'])
+@app.route('/diabetes/predict', methods=['POST'])
 def predict():
     try:
         # Parsing the incoming JSON data

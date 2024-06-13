@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import {Navbar} from "../Components/Navbar";
-import { response } from "express";
 
 const HeartDiseasePredictor=()=>{
-
     const [formData, setFormData]=useState({
         age:"",
         sex:"",
@@ -108,7 +106,7 @@ const HeartDiseasePredictor=()=>{
 
     return(
         <>
-            <Navbar>
+            <Navbar />
                 <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-tl from-green-400 to-blue-500 p-6">
                     <h2 className="text-3xl font-bold text-white mb-6">Heart Disease Predictor</h2>
 
@@ -398,7 +396,6 @@ const HeartDiseasePredictor=()=>{
 
                     
                 </div>
-            </Navbar>
         </>
     )
 }

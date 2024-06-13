@@ -36,7 +36,9 @@ export const Navbar = () => {
   return (
     <nav className="w-full h-16 flex justify-between items-center px-5">
       <div className="logo w-10">
-        <Link to={"/"}><img className="ml-10" src="./image.png" alt="" /></Link>
+        <Link to={"/"}>
+          <img className="ml-10" src="./image.png" alt="" />
+        </Link>
       </div>
       <div className="nav-contains w-1/2 text-xl font-sans font-bold">
         <ul className="flex justify-between">
@@ -72,7 +74,7 @@ export const Navbar = () => {
           <div>
             <button
               className=" realtive w-32 h-10 bg-[#76dbcf] rounded-2xl font-semibold"
-              onClick={() => setIsOpen((prev) => !prev)}
+              onClick={() => setIsOpen((prev) => !prev) }
             >
               LOGIN
             </button>

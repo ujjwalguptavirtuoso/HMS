@@ -2,7 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 import { User } from "../models/user.model.js";
 import ErrorHandler from "../middlewares/error.middlewares.js";
 import { generateToken } from "../utils/jwtToken.js";
-import validator from "validator";
+import { resModel } from "../utils/response.js";
 // import cloudinary from "cloudinary";
 
 const validateStringField = (field, value) => {
@@ -229,7 +229,7 @@ export const userLogin=asyncHandler(async (req, res, next)=>{
 // Logout function for dashboard admin
 export const logoutAdmin = asyncHandler(async (req, res, next) => {
   res
-    .status(201)
+    .status(200)
     .cookie("adminToken", "", {
       httpOnly: true,
       expiresIn: new Date(Date.now()),
@@ -243,7 +243,7 @@ export const logoutAdmin = asyncHandler(async (req, res, next) => {
 // Logout function for frontend patient
 export const logoutPatient = asyncHandler(async (req, res, next) => {
   res
-    .status(201)
+    .status(200)
     .cookie("patientToken", "", {
       httpOnly: true,
       expiresIn: new Date(Date.now()),
@@ -257,7 +257,7 @@ export const logoutPatient = asyncHandler(async (req, res, next) => {
 // Logout function for frontend patient
 export const logoutDoctor = asyncHandler(async (req, res, next) => {
   res
-    .status(201)
+    .status(200)
     .cookie("doctorToken", "", {
       httpOnly: true,
       expiresIn: new Date(Date.now()),
@@ -267,3 +267,85 @@ export const logoutDoctor = asyncHandler(async (req, res, next) => {
       message: "Doctor Logged Out Successfully.",
     });
 });
+
+
+/*::::::::::::::::::::::::::::::::::::::::::::::: ADMIN-CONTROLS :::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+export const getAllAdmins=asyncHandler(async (req, res)=>{
+  try {
+    const admins = await User.find({role: "Admin"});
+    res.status(200).json(resModel(true, "Admins retrieved successfully.", admins));
+  } catch (error) {
+    res.status(404).json(resModel(false, "Failed to fetch admins.", null));
+  }
+})
+
+export const getAdminById=asyncHandler(async (req, res)=>{
+  try {
+    const admin = await User.findOne({ role: "Admin", _id: req.params.id });
+    if (!admin) {
+      return res.status(404).json(resModel(false, "Admin with this id doesn't exist", null));
+    }
+    res.status(200).json(resModel(true, "Admin retrieved successfully.", admin));
+  } catch (error) {
+    res.status(400).json(resModel(true, "Failed to fetch admin.", null));
+  }
+})
+
+// async function createAdmin(req, res) {
+//   try {
+//     // Hash the password
+//     const hashedPassword = await bcrypt.hash(req.body.passWord, 10);
+
+//     const lastAdmin = await Admin.findOne().sort({ adminId: -1 });
+//     const lastAdminId = lastAdmin ? lastAdmin.adminId : 0;
+
+//     const admin = new Admin({
+//       ...req.body,
+//       passWord: hashedPassword,
+//       adminId: lastAdminId + 1,
+//     });
+//     await admin.save();
+//     res.json(resModel("SUCCESS", "Admin created successfully.", admin));
+//   } catch (error) {
+//     res.json(resModel("ERROR", "Failed to create admin.", error));
+//   }
+// }
+
+export const updateAdmin=asyncHandler(async (req, res)=>{
+  try {
+    // Hash the password if it's included in the request body
+    if (req.body.password) {
+      req.body.password = await bcrypt.hash(req.body.password, 10);
+    }
+
+    const updatedAdmin = await User.findOneAndUpdate(
+      { _id: req.params.id, role: "Admin" },
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!updatedAdmin) {
+      return res.status(404).json(resModel(false, "Admin not found.", null));
+    }
+    res.status(200).json(resModel(true, "Admin updated successfully.", updatedAdmin));
+  } catch (error) {
+    res.status(400).json(resModel(false, "Failed to update admin.", error));
+  }
+})
+
+export const deleteAdmin=asyncHandler(async (req, res)=>{
+  try {
+    const deletedAdmin = await User.findOneAndDelete({
+      _id: req.params.id,
+      role: "Admin"
+    });
+    if (!deletedAdmin) {
+      return res.status(404).json(resModel(false, "Admin not found.", null));
+    }
+    res.status(200).json(resModel(true, "Admin deleted successfully.", deletedAdmin));
+  } catch (error) {
+    res.status(400).json(resModel(false, "Failed to delete admin.", error));
+  }
+})
+
+
