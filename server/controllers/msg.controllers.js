@@ -1,6 +1,7 @@
 import { Message } from "../models/msg.model.js";
 import ErrorHandler from "../middlewares/error.middlewares.js";
-export const sendMessage=async (req, res, next)=>{
+import {asyncHandler} from "../utils/asyncHandler.js"
+export const sendMessage=asyncHandler(async (req, res, next)=>{
     const {firstName, lastName, email, phone, message} =req.body;
 
     if(!firstName|| !lastName|| !email|| !phone|| !message)
@@ -13,4 +14,12 @@ export const sendMessage=async (req, res, next)=>{
             success:true,
             message: "Message sent successfully!"
         });
-}
+})
+
+export const getAllMessages = asyncHandler(async (req, res, next) => {
+  const messages = await Message.find();
+  res.status(200).json({
+    success: true,
+    messages,
+  });
+});
