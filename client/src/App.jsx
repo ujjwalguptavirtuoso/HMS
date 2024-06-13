@@ -20,6 +20,7 @@ import Doctors from "./Pages/Doctors";
 import { useContext } from "react";
 import { useEffect } from "react";
 import { Context } from "./main";
+import HeartDiseasePredictor from "./Pages/HeartDiseasePredictor";
 
 const App = () => {
   const { isAuthenticated, setIsAuthenticated, setUser } =
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/quick-help" element={<QuickHelp />} />
           <Route path="/diabetes-predictor" element={<DiabetesPredictor />} />
           <Route path="/thyroid-predictor" element={<ThyroidPredictor />} />
+          <Route path="/heart-disease-predictor" element={<HeartDiseasePredictor />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logindoctor" element={<Logindoctor />} />
           <Route path="/loginadmin" element={<Loginadmin />} />
