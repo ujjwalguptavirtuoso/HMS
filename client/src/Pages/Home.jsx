@@ -5,6 +5,7 @@ import Message from "../Components/Message";
 import { Footer } from "../Components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ChatBubble from "../Components/ChatBubble";
 function decode(token) {
   try {
     const tokenValue = JSON.parse(window.atob(token.split(".")[1]));
@@ -53,17 +54,17 @@ const Home = () => {
           </h1>
         </div>
         <div className="departments w-full h-fit px-20 mt-9 flex flex-wrap flex-shrink-0 justify-around">
-        {departmentsArray.map((depart, index) => {
-          return (
-            <div
-              //className="departments w-full h-fit px-20 mt-9 flex flex-wrap flex-shrink-0 justify-around"
-              value={depart}
-              key={index}
-            >
-              <Department data={depart} />
-            </div>
-          );
-        })}
+          {departmentsArray.map((depart, index) => {
+            return (
+              <div
+                //className="departments w-full h-fit px-20 mt-9 flex flex-wrap flex-shrink-0 justify-around"
+                value={depart}
+                key={index}
+              >
+                <Department data={depart} />
+              </div>
+            );
+          })}
         </div>
         {/* <div className="departments w-full h-fit px-20 mt-9 flex flex-wrap flex-shrink-0 justify-around">
           <Department data={"Dermatology"} />
@@ -76,7 +77,7 @@ const Home = () => {
           <Department data={"Radiology"} />
         </div> */}
       </div>
-
+      <ChatBubble />
       {/* Message Section + footer */}
       <div className="sec-3 w-full h-fit bg-gradient-to-b from-[#76dbcf] to-[#d0f7f3] pb-5">
         <div className="department-head flex justify-center">
