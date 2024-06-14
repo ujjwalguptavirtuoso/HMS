@@ -4,7 +4,7 @@ import ErrorHandler from "../middlewares/error.middlewares.js";
 import { generateToken } from "../utils/jwtToken.js";
 import { resModel } from "../utils/response.js";
 import validator from "validator";
-import { v2 as cloudinary } from "cloudinary";
+import cloudinary from "cloudinary";
 
 const validateStringField = (field, value) => {
   if (typeof value == "string" && value.trim() === "") {
@@ -156,6 +156,11 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
     password,
   });
 
+  const isRegistered = await User.findOne({ $or: { email, phone } });
+  if (isRegistered) {
+    return next(new ErrorHandler("Doctor already Registered!", 400));
+  }
+
   const cloudinaryResponse = await cloudinary.uploader.upload(
     avatar.tempFilePath
   );
@@ -169,11 +174,6 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
     );
   }
 
-  const isRegistered = await User.findOne({ $or: { email, phone } });
-  if (isRegistered) {
-    return next(new ErrorHandler("Doctor already Registered!", 400));
-  }
-
   const doc = await User.create({
     firstName,
     lastName,
@@ -185,7 +185,7 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
     password,
     doctorDepartment,
     role: "Doctor",
-    docAvatar: {
+    avatar: {
       public_id: cloudinaryResponse.public_id,
       url: cloudinaryResponse.secure_url,
     },

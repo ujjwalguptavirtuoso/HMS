@@ -20,14 +20,14 @@ const appointmentSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: [true, "Phone Is Required!"],
-    minLength: [11, "Phone Number Must Contain Exact 11 Digits!"],
-    maxLength: [11, "Phone Number Must Contain Exact 11 Digits!"],
+    minLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
+    maxLength: [10, "Phone Number Must Contain Exact 10 Digits!"],
   },
   nic: {
     type: String,
     required: [true, "NIC Is Required!"],
-    // minLength: [13, "NIC Must Contain Only 13 Digits!"],
-    // maxLength: [13, "NIC Must Contain Only 13 Digits!"],
+    minLength: [13, "NIC Must Contain Only 13 Digits!"],
+    maxLength: [13, "NIC Must Contain Only 13 Digits!"],
   },
   dob: {
     type: Date,
@@ -39,7 +39,7 @@ const appointmentSchema = new mongoose.Schema({
     enum: ["Male", "Female"],
   },
   appointment_date: {
-    type: String,
+    type: Date,
     required: [true, "Appointment Date Is Required!"],
   },
   department: {
@@ -47,10 +47,14 @@ const appointmentSchema = new mongoose.Schema({
     required: [true, "Department Name Is Required!"],
   },
   doctor: {
-    docName: {
+    firstName: {
       type: String,
       required: [true, "Doctor Name Is Required!"],
-    }
+    },
+    lastName: {
+      type: String,
+      required: [true, "Doctor Name Is Required!"],
+    },
   },
   hasVisited: {
     type: Boolean,

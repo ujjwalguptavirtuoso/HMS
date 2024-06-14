@@ -43,16 +43,16 @@ const Appointment = () => {
   console.log(tokenExists);
 
   return (
-    <div className="sec-1 w-full h-screen bg-gradient-to-tl from-[#76dbcf]">
+    <div className="sec-1 w-full h-fit bg-gradient-to-tl from-[#76dbcf]">
       <Navbar />
       <div className="header w-full flex justify-center mt-7">
         <h1 className="font-semibold text-2xl">Our Doctors</h1>
       </div>
-      <div className="doc-details p-5 flex justify-around flex">
+      <div className="doc-details p-5 flex justify-around flex-wrap">
         {doctors && doctors.length > 0 ? (
           doctors.map((element) => {
             return (
-              <div className="flex bg-white box-border h-fit w-52 rounded-3xl p-4 border-4 shadow-[0_24px_40px_-15px_rgba(0,0,0,0.3)] flex-col items-center mx-14 mb-10">
+              <div className="flex  bg-white box-border h-fit w-52 rounded-3xl p-4 border-4 shadow-[0_24px_40px_-15px_rgba(0,0,0,0.3)] flex-col items-center mx-14 mb-10">
                 <div className="w-28 h-28 rounded-full border-2 border-emerald-300 mb-2">
                   <img src="" alt="" />
                 </div>

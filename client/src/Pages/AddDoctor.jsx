@@ -57,7 +57,7 @@ const AddDoctor = () => {
       formData.append("dob", dob);
       formData.append("gender", gender);
       formData.append("doctorDepartment", doctorDepartment);
-      // formData.append("docAvatar", docAvatar);
+      // formData.append("avatar", docAvatar);
       await axios
         .post("http://localhost:8000/api/v1/users/doctor/register", formData, {
           //withCredentials: true,
@@ -90,13 +90,13 @@ const AddDoctor = () => {
             <h1 className="font-semibold text-3xl mt-3 mb-5">Add New Doctor</h1>
             <div className="w-full h-fit mb-10">
               <form onSubmit={handleAddNewDoctor}>
-                {/* <div className="flex justify-around mb-6 items-center">
+                <div className="flex justify-around mb-6 items-center">
                   <input
                     className="h-10 bg-zinc-200 rounded-2xl px-4 items-center"
                     type="file"
                     onChange={handleAvatar}
                   />
-                </div> */}
+                </div>
                 <div className="flex justify-around mb-6">
                   <input
                     className="w-1/3 h-10 bg-zinc-200 rounded-2xl px-4"

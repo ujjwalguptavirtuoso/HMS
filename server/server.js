@@ -6,8 +6,8 @@ import {errorMiddleware } from "./middlewares/error.middlewares.js";
 import userRouter from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
 import messageRouter from "./routes/msg.routes.js";
-import { v2 as cloudinary } from "cloudinary";
-
+import fileUpload from "express-fileupload";
+import cloudinary from "cloudinary";
 import appointmentRouter from "./routes/appoinment.routes.js"
 config();
 const app = express();
@@ -16,8 +16,14 @@ const PORT = process.env.PORT || 3000;
 //middlewares
 app.use(cookieParser(process.env.JWT_SECRET))
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json({limit: "32kb"}));
+app.use(express.json());
 app.use(cors());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 //db connection
 const uri = `${process.env.MONGO_URI}/E-healthcare`;
@@ -27,13 +33,6 @@ mongoose
   .catch((err) => {
     console.log("Error connecting to MongoDB!!\n",err);
     process.exit(1);
-  });
-
-  //cloudinary init
-  cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
   });
 
 //routes
@@ -46,6 +45,13 @@ app.use("/api/v1/appoinments", appointmentRouter)
 
 //error-middleware
 app.use(errorMiddleware)
+
+  //cloudinary init
+  cloudinary.v2.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
 
 //server
 app.listen(PORT, () =>

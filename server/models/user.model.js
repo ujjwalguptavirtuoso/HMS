@@ -137,28 +137,8 @@ const userSchema = new mongoose.Schema({
     },
   },
   avatar: {
-    type: {
-      public_id: {
-        type: String,
-        validate: {
-          validator: (value) =>
-            !value || validateField("avatar", { public_id: value }),
-          message: "Invalid public_id!",
-        },
-      },
-      url: {
-        type: String,
-        validate: {
-          validator: (value) =>
-            !value || validateField("avatar", { url: value }),
-          message: "Invalid URL!",
-        },
-      },
-    },
-    validate: {
-      validator: (value) => !value || validateField("avatar", value),
-      message: "Invalid avatar data!",
-    },
+    public_id: String,
+    url: String,
   },
 });
 
