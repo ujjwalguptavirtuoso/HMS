@@ -18,6 +18,16 @@ const adminData = decode(localStorage.getItem("authToken"));
 console.log(adminData);
 
 const Home = () => {
+  const departmentsArray = [
+    "Pediatrics",
+    "Orthopedics",
+    "Cardiology",
+    "Neurology",
+    "Oncology",
+    "Radiology",
+    "Eye Specialist",
+    "Dermatology"
+  ];
   return (
     <>
       {/* Navbar + Hero Section */}
@@ -43,6 +53,19 @@ const Home = () => {
           </h1>
         </div>
         <div className="departments w-full h-fit px-20 mt-9 flex flex-wrap flex-shrink-0 justify-around">
+        {departmentsArray.map((depart, index) => {
+          return (
+            <div
+              //className="departments w-full h-fit px-20 mt-9 flex flex-wrap flex-shrink-0 justify-around"
+              value={depart}
+              key={index}
+            >
+              <Department data={depart} />
+            </div>
+          );
+        })}
+        </div>
+        {/* <div className="departments w-full h-fit px-20 mt-9 flex flex-wrap flex-shrink-0 justify-around">
           <Department data={"Dermatology"} />
           <Department data={"Cadiology"} />
           <Department data={"Neurology"} />
@@ -51,7 +74,7 @@ const Home = () => {
           <Department data={"Eye Specialist"} />
           <Department data={"ENT Specialist"} />
           <Department data={"Radiology"} />
-        </div>
+        </div> */}
       </div>
 
       {/* Message Section + footer */}
