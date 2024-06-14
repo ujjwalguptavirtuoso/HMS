@@ -37,15 +37,15 @@ router.get("/patient/logout", logoutPatient);
 
 /*______________________________ADMIN ROUTES___________________________________________*/
 router.post("/admin/register", registerAdmin);
-router.get("/admin/profile", isAdminAuthenticated, getUserDetails);
+router.get("/admin/profile", getUserDetails);
 router.get("/admin/logout", logoutAdmin);
 
 // Get all admins
 router.get("/admin/", getAllAdmins);
 // Get admin by ID
-router.get("/admin/:id", isAdminAuthenticated, getAdminById);
+router.get("/admin/:id", getAdminById);
 // Create admin
-router.post("/admin/add", isAdminAuthenticated, registerAdmin);
+router.post("/admin/add", registerAdmin);
 // Update admin
 router.put("/admin/:id", isAdminAuthenticated, updateAdmin);
 // Delete admin
