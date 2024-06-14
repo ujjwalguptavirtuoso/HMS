@@ -1,19 +1,39 @@
 import { Router } from "express";
-import {upload} from "../middlewares/multer.middleware.js"
-import {userLogin, registerPatient, registerAdmin, registerDoctor, getAllDoctors, getUserDetails, logoutAdmin, logoutPatient, logoutDoctor, getAllAdmins, getAdminById, deleteAdmin, updateAdmin} from "../controllers/user.controllers.js";
-import {isAdminAuthenticated, isPatientAuthenticated, isDoctorAuthenticated} from "../middlewares/auth.middleware.js"
+import { upload } from "../middlewares/multer.middleware.js";
+import {
+  userLogin,
+  registerPatient,
+  registerAdmin,
+  registerDoctor,
+  getAllDoctors,
+  getUserDetails,
+  logoutAdmin,
+  logoutPatient,
+  logoutDoctor,
+  getAllAdmins,
+  getAdminById,
+  deleteAdmin,
+  updateAdmin,
+  updateDoctor,
+  deleteDoctor
+} from "../controllers/user.controllers.js";
+import {
+  isAdminAuthenticated,
+  isPatientAuthenticated,
+  isDoctorAuthenticated,
+} from "../middlewares/auth.middleware.js";
 
-const router=Router();
+const router = Router();
 
 /*_____________________________________LOGIN ROUTE______________________________________*/
 router.route("/login").post(userLogin);
 
-
 /*______________________________PATIENT ROUTES_________________________________________*/
-router.route("/patient/register").post(upload.fields([{name: "avatar", maxCount: 1}]), registerPatient);
+router
+  .route("/patient/register")
+  .post(upload.fields([{ name: "avatar", maxCount: 1 }]), registerPatient);
 router.get("/patient/profile", isPatientAuthenticated, getUserDetails);
 router.get("/patient/logout", logoutPatient);
-
 
 /*______________________________ADMIN ROUTES___________________________________________*/
 router.post("/admin/register", registerAdmin);
@@ -21,7 +41,7 @@ router.get("/admin/profile", getUserDetails);
 router.get("/admin/logout", logoutAdmin);
 
 // Get all admins
-router.get("/admin/",getAllAdmins);
+router.get("/admin/", getAllAdmins);
 // Get admin by ID
 router.get("/admin/:id", getAdminById);
 // Create admin
@@ -31,12 +51,17 @@ router.put("/admin/:id", isAdminAuthenticated, updateAdmin);
 // Delete admin
 router.delete("/admin/:id", isAdminAuthenticated, deleteAdmin);
 
-
 /*______________________________DOCTOR ROUTES___________________________________________*/
 router.get("/doctors", getAllDoctors);
-router.route("/doctor/register").post(upload.fields([{name: "avatar", maxCount: 1}]),registerDoctor);
-router.get("/doctor/profile", isDoctorAuthenticated, getUserDetails)
-router.get("/doctor/logout", logoutDoctor)
+router
+  .route("/doctor/register")
+  .post(upload.fields([{ name: "avatar", maxCount: 1 }]), registerDoctor);
+router.get("/doctor/profile", isDoctorAuthenticated || isAdminAuthenticated, getUserDetails);
+router.get("/doctor/logout", logoutDoctor);
 
+// Update doctor
+router.put("/doctor", isDoctorAuthenticated, updateDoctor);
+//Delete doctor
+router.delete("/doctor/:id", isAdminAuthenticated, deleteDoctor);
 
 export default router;

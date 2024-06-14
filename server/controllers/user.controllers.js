@@ -367,4 +367,87 @@ export const deleteAdmin=asyncHandler(async (req, res)=>{
   }
 })
 
+export const updateDoctor = asyncHandler(async (req, res, next) => {
+  const { id } = req.params; // Get doctor ID from URL params
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    nic,
+    dob,
+    gender,
+    doctorDepartment,
+  } = req.body; // Get updated fields from the request body
 
+  // Find the doctor by ID
+  const doctor = await User.findById(id);
+
+  if (!doctor) {
+    return next(new ErrorHandler("Doctor not found", 404)); // If the doctor is not found, return an error
+  }
+
+  // Check if a new avatar is uploaded
+  if (req.files && req.files.avatar) {
+    const { avatar } = req.files;
+    const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
+    if (!allowedFormats.includes(avatar.mimetype)) {
+      return next(new ErrorHandler("File Format Not Supported!", 400));
+    }
+
+    // Delete old avatar from Cloudinary
+    if (doctor.avatar && doctor.avatar.public_id) {
+      await cloudinary.v2.uploader.destroy(doctor.avatar.public_id);
+    }
+
+    // Upload new avatar to Cloudinary
+    const cloudinaryResponse = await cloudinary.v2.uploader.upload(
+      docAvatar.tempFilePath
+    );
+
+    if (!cloudinaryResponse || cloudinaryResponse.error) {
+      console.error(
+        "Cloudinary Error:",
+        cloudinaryResponse.error || "Unknown Cloudinary error"
+      );
+      return next(
+        new ErrorHandler("Failed To Upload Doctor Avatar To Cloudinary", 500)
+      );
+    }
+
+    doctor.avatar = {
+      public_id: cloudinaryResponse.public_id,
+      url: cloudinaryResponse.secure_url,
+    };
+  }
+
+  doctor.firstName = firstName || doctor.firstName;
+  doctor.lastName = lastName || doctor.lastName;
+  doctor.email = email || doctor.email;
+  doctor.phone = phone || doctor.phone;
+  doctor.nic = nic || doctor.nic;
+  doctor.dob = dob || doctor.dob;
+  doctor.gender = gender || doctor.gender;
+  doctor.doctorDepartment = doctorDepartment || doctor.doctorDepartment;
+
+  await doctor.save();
+
+  res.status(200).json(resModel(true, "Doctor updated successfully", doctor));
+});
+
+export const deleteDoctor = asyncHandler(async (req, res) => {
+  try {
+    const deletedDoctor = await User.findOneAndDelete({
+      _id: req.params.id,
+      role: "Doctor",
+    });
+    if (!deletedDoctor) {
+      return res.status(404).json(resModel(false, "Doctor not found.", null));
+    }
+    res
+      .status(200)
+      .json(resModel(true, "Doctor deleted successfully.", deletedDoctor));
+  } catch (error) {
+    res.status(400).json(resModel(false, "Failed to delete Doctor", error));
+  }
+});

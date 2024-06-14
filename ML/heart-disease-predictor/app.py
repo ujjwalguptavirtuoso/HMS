@@ -1,12 +1,10 @@
-from flask import Flask, jsonify, make_response, render_template, request 
+from flask import Flask, jsonify, make_response, request 
 import pickle
 import pandas as pd 
 from flask_cors import CORS
 import logging
 
-# Load Random Forest Classifier model
-fileName='heart-disease-prediction-random-forest-classifier.pkl'
-
+fileName='heart.pkl'
 
 app=Flask(__name__)
 
@@ -15,7 +13,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 logging.basicConfig(level=logging.DEBUG)
 
 try:
-    model=pickle.load(open(fileName, 'rb'))
+    model = pickle.load(open(fileName, 'rb'))
     app.logger.info("Model loaded successfully")
 except Exception as e:
     app.logger.error(f"Error loading model: {e}")
