@@ -135,11 +135,12 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("Doctor Avatar Required!", 400));
   }
-  const { docAvatar } = req.files;
+  const { avatar } = req.files;
   const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
-  if (!allowedFormats.includes(docAvatar.mimetype)) {
+  if (!allowedFormats.includes(avatar.mimetype)) {
     return next(new ErrorHandler("File Format Not Supported!", 400));
   }
+
   const { firstName, lastName, email, phone, nic, dob, gender, doctorDepartment, password } =
     req.body;
 
@@ -156,7 +157,7 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
   });
 
   const cloudinaryResponse = await cloudinary.uploader.upload(
-    docAvatar.tempFilePath
+    avatar.tempFilePath
   );
   if (!cloudinaryResponse || cloudinaryResponse.error) {
     console.error(
