@@ -9,17 +9,18 @@ import { Navigate } from "react-router-dom";
 const AdminHome = () => {
   const { isAuthenticated, setIsAuthenticated, admin, setAdmin } =
     useContext(Context);
+    // const {admindata}=null
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/v1/users/admin/:id",
+          "http://localhost:8000/api/v1/users/admin/",
           {
             //withCredentials: true,
           }
         );
-        console.log(response)
+        response.data.data[response.data.data.length-1]
         setIsAuthenticated(true);
         setAdmin(response.data.user);
       } catch (error) {
@@ -27,8 +28,11 @@ const AdminHome = () => {
     };
     fetchUser();
   }, [isAuthenticated]);
+  // const { isAuthenticated, admin } = useContext(Context);
   console.log(isAuthenticated)
-
+  // const admindata=response.data.data[response.data.data.length-1]
+  // console.log(admindata)
+  
   return (
     <div className="flex">
       <Sidebar />
