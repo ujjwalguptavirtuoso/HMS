@@ -32,13 +32,15 @@ const AdminHome = () => {
   console.log(isAuthenticated)
   // const admindata=response.data.data[response.data.data.length-1]
   // console.log(admindata)
+
+  const {firstName, lastName}=JSON.parse(localStorage.getItem("admin"));
   
   return (
     <div className="flex">
       <Sidebar />
       <div className="w-full pt-8 pr-8 pl-6">
         <div className="w-full bg-sky-100 h-fit rounded-2xl p-5 flex flex-col items-center mb-5">
-          <h1 className="text-4xl font-semibold mb-8">Hi, Aayush Chatterjee</h1>
+          <h1 className="text-4xl font-semibold mb-8">Hi, {firstName+" "+lastName}</h1>
           <div className="flex w-full gap-10 mb-4">
             <div className="w-1/2 bg-[#76dbcf] rounded-xl p-8 font-semibold text-2xl flex justify-between">
               <h1>Total No. Of Doctors :</h1>

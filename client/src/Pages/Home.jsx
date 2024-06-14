@@ -5,6 +5,17 @@ import Message from "../Components/Message";
 import { Footer } from "../Components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+function decode(token) {
+  try {
+    const tokenValue = JSON.parse(window.atob(token.split(".")[1]));
+    // console.log(tokenValue);
+    return tokenValue;
+  } catch (e) {
+    return undefined;
+  }
+}
+const adminData = decode(localStorage.getItem("authToken"));
+console.log(adminData);
 
 const Home = () => {
   return (

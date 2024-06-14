@@ -30,8 +30,9 @@ const loginadmin = () => {
         }
       );
 
-      const { token } = response.data; 
+      const { token, user } = response.data; 
       localStorage.setItem("authToken", token); // Save the token to localStorage
+      localStorage.setItem("admin", JSON.stringify(user));
 
       toast.success(response.data.message);
       setIsAuthenticated(true);

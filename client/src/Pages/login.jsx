@@ -57,8 +57,9 @@ const login = () => {
         }
       );
 
-      const { token } = response.data; 
+      const { token, user } = response.data; 
       localStorage.setItem("authToken", token); // Save the token to localStorage
+      localStorage.setItem("patient", JSON.stringify(user));
 
       toast.success(response.data.message);
       setIsAuthenticated(true);
