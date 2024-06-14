@@ -57,7 +57,7 @@ const AddDoctor = () => {
       formData.append("dob", dob);
       formData.append("gender", gender);
       formData.append("doctorDepartment", doctorDepartment);
-      // formData.append("avatar", docAvatar);
+      formData.append("avatar", docAvatar);
       await axios
         .post("http://localhost:8000/api/v1/users/doctor/register", formData, {
           //withCredentials: true,

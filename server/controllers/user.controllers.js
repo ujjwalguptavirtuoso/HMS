@@ -132,6 +132,7 @@ export const registerAdmin=asyncHandler(async (req,res,next)=>{
 /*:::::::::::::::::::::::::::::::::::::::::::::::DOCTOR-REGISTRATION:::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 export const registerDoctor = asyncHandler(async (req, res, next) => {
+  console.log(req.files)
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("Doctor Avatar Required!", 400));
   }
@@ -143,6 +144,8 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
 
   const { firstName, lastName, email, phone, nic, dob, gender, doctorDepartment, password } =
     req.body;
+
+    console.log(typeof dob)
 
   validateFields({
     firstName,
@@ -161,18 +164,18 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
     return next(new ErrorHandler("Doctor already Registered!", 400));
   }
 
-  const cloudinaryResponse = await cloudinary.uploader.upload(
-    avatar.tempFilePath
-  );
-  if (!cloudinaryResponse || cloudinaryResponse.error) {
-    console.error(
-      "Cloudinary Error:",
-      cloudinaryResponse.error || "Unknown Cloudinary error"
-    );
-    return next(
-      new ErrorHandler("Failed To Upload Doctor Avatar To Cloudinary", 500)
-    );
-  }
+   const cloudinaryResponse = await cloudinary.uploader.upload(
+     avatar.tempFilePath
+   );
+   if (!cloudinaryResponse || cloudinaryResponse.error) {
+     console.error(
+       "Cloudinary Error:",
+       cloudinaryResponse.error || "Unknown Cloudinary error"
+     );
+     return next(
+       new ErrorHandler("Failed To Upload Doctor Avatar To Cloudinary", 500)
+     );
+   }
 
   const doc = await User.create({
     firstName,

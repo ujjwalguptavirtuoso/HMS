@@ -53,15 +53,15 @@ router.delete("/admin/:id", isAdminAuthenticated, deleteAdmin);
 
 /*______________________________DOCTOR ROUTES___________________________________________*/
 router.get("/doctors", getAllDoctors);
-router
-  .route("/doctor/register")
-  .post(upload.fields([{ name: "avatar", maxCount: 1 }]), registerDoctor);
-// router.post("/doctor/register", isAdminAuthenticated, registerDoctor);
+// router
+//   .route("/doctor/register")
+//   .post(upload.fields([{ name: "avatar", maxCount: 1 }]), registerDoctor);
+router.post("/doctor/register", registerDoctor);
 router.get("/doctor/profile", isDoctorAuthenticated || isAdminAuthenticated, getUserDetails);
 router.get("/doctor/logout", logoutDoctor);
 
 // Update doctor
-router.put("/doctor", isAdminAuthenticated, updateDoctor);
+router.put("/doctor/:id", isAdminAuthenticated, updateDoctor);
 //Delete doctor
 router.delete("/doctor/:id", isAdminAuthenticated, deleteDoctor);
 
