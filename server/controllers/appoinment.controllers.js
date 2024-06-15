@@ -1,7 +1,7 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import ErrorHandler from "../middlewares/error.middlewares.js";
 import { Appointment } from "../models/appoinment.model.js";
-import {User} from "../models/user.model.js";
+import { User } from "../models/user.model.js";
 
 const postAppointment = asyncHandler(async (req, res, next) => {
   const {
@@ -81,32 +81,30 @@ const postAppointment = asyncHandler(async (req, res, next) => {
   });
 });
 
- const getAllAppointments = asyncHandler(async (req, res, next) => {
+const getAllAppointments = asyncHandler(async (req, res, next) => {
   const appointments = await Appointment.find();
   res.status(200).json({
     success: true,
     appointments,
   });
 });
-const updateAppointmentStatus = asyncHandler(
-  async (req, res, next) => {
-    const { id } = req.params;
-    let appointment = await Appointment.findById(id);
-    if (!appointment) {
-      return next(new ErrorHandler("Appointment not found!", 404));
-    }
-    appointment = await Appointment.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
-      useFindAndModify: false,
-    });
-    res.status(200).json({
-      success: true,
-      message: "Appointment Status Updated!",
-    });
+const updateAppointmentStatus = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  let appointment = await Appointment.findById(id);
+  if (!appointment) {
+    return next(new ErrorHandler("Appointment not found!", 404));
   }
-);
- const deleteAppointment = asyncHandler(async (req, res, next) => {
+  appointment = await Appointment.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+  res.status(200).json({
+    success: true,
+    message: "Appointment Status Updated!",
+  });
+});
+const deleteAppointment = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const appointment = await Appointment.findById(id);
   if (!appointment) {
@@ -119,4 +117,9 @@ const updateAppointmentStatus = asyncHandler(
   });
 });
 
-export {postAppointment,getAllAppointments,updateAppointmentStatus,deleteAppointment};
+export {
+  postAppointment,
+  getAllAppointments,
+  updateAppointmentStatus,
+  deleteAppointment,
+};

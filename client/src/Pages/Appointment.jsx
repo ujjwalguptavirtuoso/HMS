@@ -43,7 +43,7 @@ const Appointment = () => {
   console.log(tokenExists);
 
   return (
-    <div className="sec-1 w-full h-fit bg-gradient-to-tl from-[#76dbcf]">
+    <div className="sec-1 w-full h-screen bg-gradient-to-tl from-[#76dbcf]">
       <Navbar />
       <div className="header w-full flex justify-center mt-7">
         <h1 className="font-semibold text-2xl">Our Doctors</h1>
@@ -56,11 +56,16 @@ const Appointment = () => {
                 <div className="w-28 h-28 rounded-full border-2 border-emerald-300 mb-2">
                   <img src="" alt="" />
                 </div>
-                <h1 className="text-black font-semibold text-xl ">{element.firstName} {element.lastName}</h1>
-                <h1 className="text-black font-semibold text-xl">{element.doctorDepartment}</h1>
+                <h1 className="text-black font-semibold text-xl ">
+                  {element.firstName} {element.lastName}
+                </h1>
+                <h1 className="text-black font-semibold text-xl">
+                  {element.doctorDepartment}
+                </h1>
                 <button
                   onClick={() => {
                     if (tokenExists) {
+                      console.log(element.firstName);
                       setShowModal(true);
                     } else {
                       navigateTo("/login");
@@ -71,7 +76,10 @@ const Appointment = () => {
                   Book Appointment
                 </button>
                 {showModal && (
-                  <AppointForm onClose={() => setShowModal(false) } data={[element.doctorDepartment,element.firstName,element.lastName]}/>
+                  <AppointForm
+                    onClose={() => setShowModal(false)}
+                    doctor={[element.firstName,element.lastName,element.doctorDepartment]}
+                  />
                 )}
               </div>
             );
