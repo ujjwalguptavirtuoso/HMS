@@ -4,8 +4,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const AppointForm = ({ onClose }) => {
+const AppointForm = ({ onClose, doctor }) => {
+  // const docfirst = doctor[0];
+  // const doclast = doctor[1];
+  // const dept = doctor[2];
+  // console.log(docfirst, doclast, dept);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -23,6 +29,9 @@ const AppointForm = ({ onClose }) => {
     e.preventDefault();
     try {
       const hasVisitedBool = Boolean(hasVisited);
+      const docfirst = doctor[0];
+      const doclast = doctor[1];
+      const dept = doctor[2];
       const { data } = await axios.post(
         "http://localhost:8000/api/v1/appoinments/post",
         {
@@ -34,14 +43,14 @@ const AppointForm = ({ onClose }) => {
           dob,
           gender,
           appointment_date: appointmentDate,
-          department,
-          doctor_firstName: doctorFirstName,
-          doctor_lastName: doctorLastName,
+          department: dept,
+          doctor_firstName: docfirst,
+          doctor_lastName: doclast,
           hasVisited: hasVisitedBool,
           address,
         },
         {
-          //withCredentials: true,
+          // withCredentials: true,
           headers: { "Content-Type": "application/json" },
         }
       );
@@ -63,7 +72,7 @@ const AppointForm = ({ onClose }) => {
       toast.error(error.response.data.message);
     }
   };
-  // const [depart, firstname, lastname] = dept;
+  // const [firstname, lastname, depart] = doctor;
   // console.log(depart);
   return (
     <div className="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
@@ -121,7 +130,7 @@ const AppointForm = ({ onClose }) => {
               />
               <input
                 className="w-96 h-10 bg-zinc-200 rounded-2xl px-4 outline-none"
-                type="text"
+                type="date"
                 placeholder="Dob"
                 value={dob}
                 onChange={(e) => setDob(e.target.value)}
@@ -145,10 +154,27 @@ const AppointForm = ({ onClose }) => {
               </label>
               <input
                 className="w-96 h-10 bg-zinc-200 rounded-2xl px-4 outline-none"
-                type="text"
+                type="date"
                 placeholder="Appointment date"
                 value={appointmentDate}
                 onChange={(e) => setAppointmentDate(e.target.value)}
+              />
+            </div>
+            <div className="w-full px-14">
+              <textarea
+                className=" w-full bg-zinc-200 rounded-2xl px-4 py-2 outline-none"
+                rows="3"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="Address"
+              />
+            </div>
+            <div className="w-full px-14 flex gap-10 flex-start">
+              <p>Have you visited before?</p>
+              <input
+                type="checkbox"
+                checked={hasVisited}
+                onChange={(e) => setHasVisited(e.target.checked)}
               />
             </div>
             <div className="flex w-full justify-center mt-3">
