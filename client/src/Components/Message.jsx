@@ -17,7 +17,7 @@ const Message = () => {
           "http://localhost:8000/api/v1/message/send",
           { firstName, lastName, email, phone, message },
           {
-            // withCredentials: true,
+            withCredentials: true,
             headers: { "Content-Type": "application/json" },
           }
         )

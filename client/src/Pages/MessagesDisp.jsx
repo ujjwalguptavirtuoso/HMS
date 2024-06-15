@@ -14,7 +14,7 @@ const MessagesDisp = () => {
         const { data } = await axios.get(
           "http://localhost:8000/api/v1/message/get-all-msg",
           {
-            //withCredentials: true
+            withCredentials: true
           }
         );
         console.log(data.messages);
@@ -30,12 +30,12 @@ const MessagesDisp = () => {
       <Sidebar />
       <section className="page messages p-7 mt-10 w-full">
         <h1 className="font-semibold text-3xl mb-3">MESSAGE</h1>
-        <div className="banner flex w-full justify-around flex-wrap gap-5">
+        <div className="banner flex w-full items-center flex-wrap gap-5 flex-col-reverse">
           {messages && messages.length > 0 ? (
             messages.map((element) => {
               return (
-                <div className="w-1/3 h-fit flex-shrink-0" key={element._id}>
-                  <div className="w-full h-fit bg-sky-100 rounded-2xl p-5">
+                <div className=" w-10/12 h-fit flex-shrink-0" key={element._id}>
+                  <div className=" w-auto h-fit bg-sky-100 rounded-2xl p-5">
                     <h1 className="font-semibold text-xl">
                       First Name : <span>{element.firstName}</span>
                     </h1>

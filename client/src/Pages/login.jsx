@@ -52,14 +52,16 @@ const login = () => {
         "http://localhost:8000/api/v1/users/login",
         { email, password, confirmPassword: password, role: "Patient" },
         {
-          headers: { "Content-Type": "application/json" },
-          // withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials:true,
         }
       );
 
       const { token, user } = response.data; 
       localStorage.setItem("authToken", token); // Save the token to localStorage
-      localStorage.setItem("patient", JSON.stringify(user));
+      // localStorage.setItem("patient", JSON.stringify(user));
 
       toast.success(response.data.message);
       setIsAuthenticated(true);
@@ -67,7 +69,7 @@ const login = () => {
       setEmail("");
       setPassword("");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error);
     }
   };
 

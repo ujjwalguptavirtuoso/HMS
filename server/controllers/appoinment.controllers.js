@@ -55,6 +55,7 @@ const postAppointment = asyncHandler(async (req, res, next) => {
   }
   const doctorId = isConflict[0]._id;
   const patientId = req.user._id;
+  console.log(req.user)
   const appointment = await Appointment.create({
     firstName,
     lastName,

@@ -20,7 +20,7 @@ const Sidebar = () => {
       const res = await axios.get(
         "http://localhost:8000/api/v1/users/admin/logout",
         {
-          // withCredentials: true, // Include cookies in the request
+          withCredentials: true, // Include cookies in the request
           headers: { "Content-Type": "application/json" },
         }
       );

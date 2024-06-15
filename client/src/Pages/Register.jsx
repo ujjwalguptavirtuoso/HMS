@@ -32,7 +32,7 @@ const Register = () => {
           "http://localhost:8000/api/v1/users/patient/register",
           { firstName, lastName, email, phone, nic, dob, gender, password, role: "Patient" },
           {
-            //withCredentials: true,
+            withCredentials: true,
             headers: { "Content-Type": "application/json" },
           }
         )

@@ -60,7 +60,7 @@ const AddDoctor = () => {
       formData.append("avatar", docAvatar);
       await axios
         .post("http://localhost:8000/api/v1/users/doctor/register", formData, {
-          //withCredentials: true,
+          withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         })
         .then((res) => {
@@ -148,7 +148,7 @@ const AddDoctor = () => {
                 <div className="flex justify-around mb-6">
                   <label className="w-1/3 h-10 bg-zinc-200 rounded-2xl px-4">
                     <select
-                      className="w-fit h-10 bg-zinc-200 rounded-2xl  border-0"
+                      className="w-full h-10 bg-zinc-200 rounded-2xl border-0"
                       name="selectedGender"
                       value={gender}
                       onChange={(e) => setGender(e.target.value)}
@@ -158,7 +158,7 @@ const AddDoctor = () => {
                       </option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
-                      <option value="nosay">prefer not to say</option>
+                      <option value="Other">prefer not to say</option>
                     </select>
                   </label>
                   <input

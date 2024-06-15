@@ -32,7 +32,7 @@ const AppointForm = ({ onClose, doctor }) => {
       const docfirst = doctor[0];
       const doclast = doctor[1];
       const dept = doctor[2];
-      const { data } = await axios.post(
+      const response= await axios.post(
         "http://localhost:8000/api/v1/appoinments/post",
         {
           firstName,
@@ -50,11 +50,12 @@ const AppointForm = ({ onClose, doctor }) => {
           address,
         },
         {
-          // withCredentials: true,
+          withCredentials: true,
           headers: { "Content-Type": "application/json" },
         }
       );
-      toast.success(data.message);
+      // console.log(response)
+      toast.success(response.data.message);
       setFirstName(""),
         setLastName(""),
         setEmail(""),
@@ -73,7 +74,7 @@ const AppointForm = ({ onClose, doctor }) => {
     }
   };
   // const [firstname, lastname, depart] = doctor;
-  // console.log(depart);
+  // console.log();
   return (
     <div className="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
       <div className="w-2/3 flex flex-col">
@@ -130,7 +131,7 @@ const AppointForm = ({ onClose, doctor }) => {
               />
               <input
                 className="w-96 h-10 bg-zinc-200 rounded-2xl px-4 outline-none"
-                type="date"
+                type="text"
                 placeholder="Dob"
                 value={dob}
                 onChange={(e) => setDob(e.target.value)}
@@ -139,7 +140,7 @@ const AppointForm = ({ onClose, doctor }) => {
             <div className=" w-full flex justify-around mb-6">
               <label className="w-96 h-10 bg-zinc-200 rounded-2xl px-4">
                 <select
-                  className="w-fit h-10 bg-zinc-200 rounded-2xl  border-0 outline-none"
+                  className="w-full h-10 bg-zinc-200 rounded-2xl  border-0 outline-none"
                   name="selectedGender"
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
@@ -147,9 +148,9 @@ const AppointForm = ({ onClose, doctor }) => {
                   <option className="w-fit" value="">
                     Gender
                   </option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="nosay">prefer not to say</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">prefer not to say</option>
                 </select>
               </label>
               <input

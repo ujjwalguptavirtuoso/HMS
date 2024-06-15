@@ -32,7 +32,7 @@ const App = () => {
         const response = await axios.get(
           "http://localhost:8000/api/v1/users/patient/profile",
           {
-            //withCredentials: true,
+            withCredentials: true,
           }
         );
         setIsAuthenticated(true);

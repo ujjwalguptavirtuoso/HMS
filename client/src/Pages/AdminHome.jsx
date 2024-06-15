@@ -17,7 +17,7 @@ const AdminHome = () => {
         const response = await axios.get(
           "http://localhost:8000/api/v1/users/admin/",
           {
-            //withCredentials: true,
+            withCredentials: true,
           }
         );
         response.data.data[response.data.data.length-1]

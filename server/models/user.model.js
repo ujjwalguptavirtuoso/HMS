@@ -102,7 +102,7 @@ const userSchema = new mongoose.Schema({
   gender: {
     type: String,
     required: true,
-    enum: ["Male", "Female"],
+    enum: ["Male", "Female", "Other"],
     validate: {
       validator: (value) => validateField("gender", value),
       message: "Gender must be either 'Male' or 'Female'!",

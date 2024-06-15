@@ -14,7 +14,7 @@ const Appointment = () => {
         const { data } = await axios.get(
           "http://localhost:8000/api/v1/users/doctors",
           {
-            //withCredentials: true
+            withCredentials: true
           }
         );
         console.log(data.doctors);
@@ -43,7 +43,7 @@ const Appointment = () => {
   console.log(tokenExists);
 
   return (
-    <div className="sec-1 w-full h-screen bg-gradient-to-tl from-[#76dbcf]">
+    <div className="sec-1 w-full h-full bg-gradient-to-tl from-[#76dbcf]">
       <Navbar />
       <div className="header w-full flex justify-center mt-7">
         <h1 className="font-semibold text-2xl">Our Doctors</h1>

@@ -26,7 +26,7 @@ const loginadmin = () => {
         { email, password, confirmPassword: password, role: "Admin" },
         {
           headers: { "Content-Type": "application/json" },
-          // withCredentials: true,
+          withCredentials: true,
         }
       );
 

@@ -29,7 +29,7 @@ const AddAdmin = () => {
           "http://localhost:8000/api/v1/users/admin/add",
           { firstName, lastName, email, phone, nic, dob, gender, password, },
           {
-            //withCredentials: true,
+            withCredentials: true,
             headers: { "Content-Type": "application/json" },
           }
         )
