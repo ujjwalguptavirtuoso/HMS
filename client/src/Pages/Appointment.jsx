@@ -4,8 +4,18 @@ import { Navbar } from "../Components/Navbar";
 import AppointForm from "../Components/AppointForm";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../main";
+import AppointDoctors from "../Components/AppointDoctors";
 
 const Appointment = () => {
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const handleCardClick = (cardData) => {
+    setSelectedCard(cardData);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCard(null);
+  };
   const [doctors, setDoctors] = useState([]);
   const { isAuthenticated } = useContext(Context);
   useEffect(() => {
@@ -29,6 +39,8 @@ const Appointment = () => {
   const goToLogin = () => {
     navigateTo("/login");
   };
+  // const [cards] = useState(doctors)
+  // console.log(cards)
   const [showModal, setShowModal] = useState(false);
   function checkToken() {
     const token = localStorage.getItem("authToken");
@@ -40,7 +52,7 @@ const Appointment = () => {
   }
 
   const tokenExists = checkToken();
-  console.log(tokenExists);
+  // console.log(tokenExists);
   // let df = "";
   // let dl = "";
   // let dd = "";
@@ -52,10 +64,22 @@ const Appointment = () => {
         <h1 className="font-semibold text-2xl">Our Doctors</h1>
       </div>
       <div className="doc-details p-5 flex justify-around flex-wrap">
+      {doctors && doctors.length > 0 ? (
+        doctors.map((element) => (
+          <AppointDoctors key={element._id} data={element} onClick={handleCardClick} />
+        ))):(
+          <h1>No Doctors</h1>
+        )}
+      </div>
+      <AppointForm data={selectedCard} onClose={handleCloseModal} />
+      {/* <div className="doc-details p-5 flex justify-around flex-wrap">
         {doctors && doctors.length > 0 ? (
           doctors.map((element) => {
             return (
-              <div className="flex  bg-white box-border h-fit w-52 rounded-3xl p-4 border-4 shadow-[0_24px_40px_-15px_rgba(0,0,0,0.3)] flex-col items-center mx-14 mb-10">
+              <div
+                key={element._id}
+                className="flex  bg-white box-border h-fit w-52 rounded-3xl p-4 border-4 shadow-[0_24px_40px_-15px_rgba(0,0,0,0.3)] flex-col items-center mx-14 mb-10"
+              >
                 <div className="w-28 h-28 rounded-full border-2 border-emerald-300 mb-2">
                   <img src="" alt="" />
                 </div>
@@ -69,15 +93,14 @@ const Appointment = () => {
                   onClick={() => {
                     if (tokenExists) {
                       console.log(element.firstName);
-                      // const df = element.firstName;
-                      // const dl = element.lastName;
-                      // const dd = element.doctorDepartment;
-                      // console.log(dd)
                       setShowModal(true);
                     } else {
                       navigateTo("/login");
                     }
                   }}
+                  // onClick={() => {
+                  //   setShowModal(true);
+                  // }}
                   className="w-40 bg-[#76dbcf] rounded-2xl h-10 font-semibold mt-2"
                 >
                   Book Appointment
@@ -85,7 +108,11 @@ const Appointment = () => {
                 {showModal && (
                   <AppointForm
                     onClose={() => setShowModal(false)}
-                    doctor={[element.firstName,element.lastName,element.doctorDepartment]}
+                    doc={[
+                      element.firstName,
+                      element.lastName,
+                      element.doctorDepartment,
+                    ]}
                   />
                 )}
               </div>
@@ -94,7 +121,7 @@ const Appointment = () => {
         ) : (
           <h1>No Doctors</h1>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

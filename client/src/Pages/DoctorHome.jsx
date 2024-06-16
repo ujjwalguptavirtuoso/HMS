@@ -81,7 +81,9 @@ const DoctorHome = () => {
         </div>
       </div>
       <div className="px-28 mt-10">
-        <h1 className=" ml-10 font-semibold text-2xl">Appointment Details : </h1>
+        <h1 className=" ml-10 font-semibold text-2xl">
+          Appointment Details :{" "}
+        </h1>
         <table className="w-full mt-4">
           <thead>
             <tr>
@@ -95,7 +97,8 @@ const DoctorHome = () => {
             {k && k.length > 0 ? (
               k.map((k) => (
                 <tr className="">
-                  {appointments[k].doctor.firstName === firstName ? (
+                  {appointments[k].doctor.firstName === firstName &&
+                  appointments[k].doctor.lastName === lastName ? (
                     <>
                       <td className="name text-center rounded-l-2xl">
                         {appointments[k].firstName} {appointments[k].lastName}

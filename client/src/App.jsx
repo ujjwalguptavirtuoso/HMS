@@ -25,6 +25,9 @@ import Test from "./Pages/test";
 import DoctorHome from "./Pages/DoctorHome";
 import PatientHome from "./Pages/PatientHome";
 
+
+import Testapp from "./test/testapp";
+
 const App = () => {
   const { isAuthenticated, setIsAuthenticated, setUser } =
     useContext(Context);
@@ -68,6 +71,7 @@ const App = () => {
           <Route path="/test" element={<Test />} />
           <Route path="/patient-home" element={<PatientHome />} />
           <Route path="/doctor-home" element={<DoctorHome />} />
+          <Route path="/testapp" element={<Testapp/>} />
         </Routes>
         <ToastContainer position="top-center" />
       </Router>

@@ -6,11 +6,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const AppointForm = ({ onClose, doctor }) => {
-  const docfirst = doctor[0];
-  const doclast = doctor[1];
-  const dept = doctor[2];
-  console.log(docfirst, doclast, dept);
+const AppointForm = ({ data, onClose}) => {
+  if(!data)return null;
+  console.log(data)
+
+  const docfirst = data.firstName
+  const doclast = data.lastName
+  const dept = data.doctorDepartment
+  console.log(docfirst,doclast,dept);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -29,11 +32,11 @@ const AppointForm = ({ onClose, doctor }) => {
     e.preventDefault();
     try {
       const hasVisitedBool = Boolean(hasVisited);
-      const docfirst = doctor[0];
+      // const docfirst = doctor[0];
       // console.log(docfirst)
       // console.log("first")
-      const doclast = doctor[1];
-      const dept = doctor[2];
+      // const doclast = doctor[1];
+      // const dept = doctor[2];
       const response= await axios.post(
         "http://localhost:8000/api/v1/appoinments/post",
         {
