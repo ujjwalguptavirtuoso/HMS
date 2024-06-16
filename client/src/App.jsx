@@ -21,6 +21,9 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { Context } from "./main";
 import HeartDiseasePredictor from "./Pages/HeartDiseasePredictor";
+import Test from "./Pages/test";
+import DoctorHome from "./Pages/DoctorHome";
+import PatientHome from "./Pages/PatientHome";
 
 const App = () => {
   const { isAuthenticated, setIsAuthenticated, setUser } =
@@ -62,6 +65,9 @@ const App = () => {
           <Route path="/doctor-addnew" element={<AddDoctor />} />
           <Route path="/admin-addnew" element={<AddAdmin />} />
           <Route path="/doctors" element={<Doctors />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/patient-home" element={<PatientHome />} />
+          <Route path="/doctor-home" element={<DoctorHome />} />
         </Routes>
         <ToastContainer position="top-center" />
       </Router>

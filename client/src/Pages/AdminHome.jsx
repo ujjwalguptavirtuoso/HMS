@@ -52,13 +52,6 @@ const AdminHome = () => {
             </div>
           </div>
         </div>
-        <div className="w-full bg-sky-100 h-[30rem] rounded-2xl p-5 mb-5">
-          <div className="flex bg-white box-border h-60 w-52 rounded-3xl p-4 border-4 shadow-[0_24px_40px_-15px_rgba(0,0,0,0.3)] flex-col mx-14 mb-10">
-            <h4 className="text-black font-semibold text-xl mt-2">
-              Patient name
-            </h4>
-          </div>
-        </div>
       </div>
     </div>
   );

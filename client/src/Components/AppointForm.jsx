@@ -7,10 +7,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const AppointForm = ({ onClose, doctor }) => {
-  // const docfirst = doctor[0];
-  // const doclast = doctor[1];
-  // const dept = doctor[2];
-  // console.log(docfirst, doclast, dept);
+  const docfirst = doctor[0];
+  const doclast = doctor[1];
+  const dept = doctor[2];
+  console.log(docfirst, doclast, dept);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -30,6 +30,8 @@ const AppointForm = ({ onClose, doctor }) => {
     try {
       const hasVisitedBool = Boolean(hasVisited);
       const docfirst = doctor[0];
+      // console.log(docfirst)
+      // console.log("first")
       const doclast = doctor[1];
       const dept = doctor[2];
       const response= await axios.post(

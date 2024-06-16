@@ -14,7 +14,7 @@ const Appointment = () => {
         const { data } = await axios.get(
           "http://localhost:8000/api/v1/users/doctors",
           {
-            withCredentials: true
+            withCredentials: true,
           }
         );
         console.log(data.doctors);
@@ -41,6 +41,9 @@ const Appointment = () => {
 
   const tokenExists = checkToken();
   console.log(tokenExists);
+  // let df = "";
+  // let dl = "";
+  // let dd = "";
 
   return (
     <div className="sec-1 w-full h-full bg-gradient-to-tl from-[#76dbcf]">
@@ -66,6 +69,10 @@ const Appointment = () => {
                   onClick={() => {
                     if (tokenExists) {
                       console.log(element.firstName);
+                      // const df = element.firstName;
+                      // const dl = element.lastName;
+                      // const dd = element.doctorDepartment;
+                      // console.log(dd)
                       setShowModal(true);
                     } else {
                       navigateTo("/login");

@@ -6,3 +6,8 @@
 *{
     font-family: "M PLUS Rounded 1c", sans-serif;
 }
+
+#statusup{
+    background-color: #76dbcf;
+    outline: none;
+}
