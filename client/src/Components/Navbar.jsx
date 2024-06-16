@@ -8,6 +8,7 @@ export const Navbar = () => {
   const patient = { name: "Patient" };
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  console.log(Context);
 
   // const handleLogout = async () => {
   //   await axios
@@ -39,12 +40,59 @@ export const Navbar = () => {
       toast.success(res.data.message);
       setIsAuthenticated(false);
       localStorage.removeItem("authToken"); // Remove token from localStorage
+      localStorage.removeItem("patient");
       navigateTo("/login");
     } catch (err) {
       toast.error(err.response?.data?.message || "Logout failed");
     }
   };
+  const handleLogoutDoctor = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:8000/api/v1/users/doctor/logout",
+        {
+          withCredentials: true, // Include cookies in the request
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log(res);
+      toast.success(res.data.message);
+      setIsAuthenticated(false);
+      localStorage.removeItem("authToken"); // Remove token from localStorage
+      localStorage.removeItem("doctor");
+      navigateTo("/logindoctor");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Logout failed");
+    }
+  };
+  // const Duser = localStorage.getItem("doctor");
+  // console.log(Duser)
+  // const Puser = localStorage.getItem("patient");
+  // console.log(Puser)
+  function checkPatient() {
+    const token = localStorage.getItem("patient");
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  const patientExists = checkPatient();
+  console.log(patientExists);
+  function checkDoctor() {
+    const token = localStorage.getItem("doctor");
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  const doctorExists = checkDoctor();
+  console.log(doctorExists);
 
+  const clickHandler = ()=>{
+    {patientExists ?handleLogout():handleLogoutDoctor()}
+  }
 
   const navigateTo = useNavigate();
 
@@ -80,12 +128,25 @@ export const Navbar = () => {
         </ul>
       </div>
       {isAuthenticated ? (
-        <button
-          className="w-32 h-10 bg-[#76dbcf] rounded-2xl font-semibold"
-          onClick={handleLogout}
-        >
-          LOGOUT
-        </button>
+        <div className="flex items-center gap-6">
+          <button
+            className="w-32 h-10 bg-[#76dbcf] rounded-2xl font-semibold"
+            onClick={clickHandler}
+          >
+            LOGOUT
+          </button>
+          <div className="profile w-14">
+            {patientExists ? (
+              <Link to={"/patient-home"}>
+                <img src="/profile.png" alt="" />
+              </Link>
+            ) : (
+              <Link to={"/doctor-home"}>
+                <img src="/profile.png" alt="" />
+              </Link>
+            )}
+          </div>
+        </div>
       ) : (
         <div className="flex">
           <button
@@ -117,9 +178,6 @@ export const Navbar = () => {
           </div>
         </div>
       )}
-      {/* <div className="profile w-14">
-        <img src="/profile.png" alt="" />
-      </div> */}
     </nav>
   );
 };

@@ -28,6 +28,7 @@ const Sidebar = () => {
       toast.success(res.data.message);
       setIsAuthenticated(false);
       localStorage.removeItem("authToken"); // Remove token from localStorage
+      localStorage.removeItem("admin");
       navigateTo("/loginadmin");
     } catch (err) {
       toast.error(err.response?.data?.message || "Logout failed");

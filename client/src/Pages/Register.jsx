@@ -23,6 +23,9 @@ const Register = () => {
   const goToLogin = () => {
     navigateTo("/login");
   };
+  const goToHome = () => {
+    navigateTo("/");
+  };
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -30,7 +33,17 @@ const Register = () => {
       await axios
         .post(
           "http://localhost:8000/api/v1/users/patient/register",
-          { firstName, lastName, email, phone, nic, dob, gender, password, role: "Patient" },
+          {
+            firstName,
+            lastName,
+            email,
+            phone,
+            nic,
+            dob,
+            gender,
+            password,
+            role: "Patient",
+          },
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
@@ -74,6 +87,12 @@ const Register = () => {
             onClick={goToLogin}
           >
             Sign In
+          </button>
+          <button
+            className="w-44 mt-5 rounded-2xl h-10 font-semibold border-solid border-2 border-black"
+            onClick={goToHome}
+          >
+            Home
           </button>
         </div>
         <div className="w-2/3 h-screen flex flex-col place-content-center">

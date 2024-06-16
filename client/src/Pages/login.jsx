@@ -20,6 +20,9 @@ const login = () => {
   const goToRegister = () => {
     navigateTo("/register");
   };
+  const goToHome = () => {
+    navigateTo("/");
+  };
 
   // const handleLogin = async (e) => {
   //   e.preventDefault();
@@ -59,9 +62,9 @@ const login = () => {
         }
       );
 
-      const { token, user } = response.data; 
+      const { token, user } = response.data;
       localStorage.setItem("authToken", token); // Save the token to localStorage
-      // localStorage.setItem("patient", JSON.stringify(user));
+      localStorage.setItem("patient", JSON.stringify(user));
 
       toast.success(response.data.message);
       setIsAuthenticated(true);
@@ -72,7 +75,6 @@ const login = () => {
       toast.error(error);
     }
   };
-
 
   if (isAuthenticated) {
     return <Navigate to={"/"} />;
@@ -127,13 +129,19 @@ const login = () => {
           </h2>
           <IoRemoveOutline size={80} />
           <p className="text-2xl flex w-full justify-center mb-6">
-            We take care our patients healths
+            We care for our patient's health
           </p>
           <button
             className="w-40  rounded-2xl h-10 font-semibold border-solid border-2 border-black"
             onClick={goToRegister}
           >
             Sign Up
+          </button>
+          <button
+            className="w-44 mt-5 rounded-2xl h-10 font-semibold border-solid border-2 border-black"
+            onClick={goToHome}
+          >
+            Home
           </button>
         </div>
       </div>
