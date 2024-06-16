@@ -20,6 +20,9 @@ const login = () => {
   const goToRegister = () => {
     navigateTo("/register");
   };
+  const goToHome = () => {
+    navigateTo("/");
+  };
 
   // const handleLogin = async (e) => {
   //   e.preventDefault();
@@ -133,6 +136,12 @@ const login = () => {
             onClick={goToRegister}
           >
             Sign Up
+          </button>
+          <button
+            className="w-44 mt-5 rounded-2xl h-10 font-semibold border-solid border-2 border-black"
+            onClick={goToHome}
+          >
+            Home
           </button>
         </div>
       </div>
