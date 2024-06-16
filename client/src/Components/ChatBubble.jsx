@@ -9,7 +9,7 @@ const ChatBubble = () => {
     script.src = "https://www.chatbase.co/embed.min.js";
     script.async = true;
     script.defer = true;
-    script.setAttribute("chatbotId", "PKqYnr5fvAIxzGdeC7gs-");
+    script.setAttribute("chatbotId", "LSpRknp6r-QVgWm2eZYwj");
     script.setAttribute("domain", "www.chatbase.co");
     document.body.appendChild(script);
 
@@ -30,11 +30,10 @@ const ChatBubble = () => {
       {isOpen && (
         <div className="mt-2 p-2 bg-white rounded-lg shadow-lg border border-gray-300">
           <iframe
-            src="https://www.chatbase.co/chatbot-iframe/PKqYnr5fvAIxzGdeC7gs-"
+            src="https://www.chatbase.co/chatbot-iframe/LSpRknp6r-QVgWm2eZYwj"
             width="100%"
-            style={{ height: "100%", minHeight: "500px" }}
-            frameBorder="0"
-            title="Chatbot"
+            style="height: 100%; min-height: 700px"
+            frameborder="0"
           ></iframe>
         </div>
       )}
