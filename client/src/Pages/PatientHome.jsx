@@ -37,6 +37,12 @@ const PatientHome = () => {
   const b = k;
   // console.log([appointments[0]].firstName);
   console.log(k);
+  var c=0;
+  appointments.forEach((obj)=>{
+    if (obj.patientId === pat._id){
+      c++
+    }
+  })
 
   return (
     <div className="w-full h-screen bg-gradient-to-tl from-[#76dbcf]">
@@ -48,7 +54,7 @@ const PatientHome = () => {
           </div>
         </div>
         <div className="w-1/3 flex h-full bg-[#76dbcf] px-4 font-semibold text-2xl rounded-3xl items-center justify-center">
-          Appointments Scheduled : {appointments.length}
+          Appointments Scheduled : {c}
         </div>
       </div>
       <div className="px-28 mt-10">

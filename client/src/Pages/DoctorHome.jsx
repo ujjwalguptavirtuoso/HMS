@@ -59,8 +59,15 @@ const DoctorHome = () => {
   // const k = Object.keys(appointments)[0];
   // console.log(appointments.k.firstName);
   const k = Object.keys(appointments);
+  const b = Object.keys(appointments);
   console.log([appointments[0]].firstName);
   console.log(k);
+  var c=0;
+  appointments.forEach((obj)=>{
+    if (obj.doctorId === doc._id){
+      c++
+    }
+  })
   return (
     <div className="w-full h-screen bg-gradient-to-tl from-[#76dbcf]">
       <Navbar />
@@ -77,7 +84,7 @@ const DoctorHome = () => {
           </div>
         </div>
         <div className="w-1/3  flex h-full bg-[#76dbcf] p-4 font-semibold text-2xl rounded-3xl items-center justify-center">
-          Appointments Scheduled : {appointments.length}
+          Appointments Scheduled : {c}
         </div>
       </div>
       <div className="px-28 mt-10">

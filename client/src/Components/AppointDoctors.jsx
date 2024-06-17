@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AppointDoctors = ({ data, onClick }) => {
+  const navigateTo = useNavigate();
   function checkToken() {
     const token = localStorage.getItem("authToken");
     if (token) {
@@ -20,7 +22,10 @@ const AppointDoctors = ({ data, onClick }) => {
         <img className="w-28 h-28 rounded-full" src={data.avatar && data.avatar.url} alt="" />
       </div>
       <h1 className="text-black font-semibold text-xl ">
-        {data.firstName} {data.lastName}
+        {data.firstName}
+      </h1>
+      <h1 className="text-black font-semibold text-xl ">
+        {data.lastName}
       </h1>
       <h1 className="text-black font-semibold text-xl">
         {data.doctorDepartment}
