@@ -4,7 +4,7 @@ import { Navbar } from "../Components/Navbar";
 const AboutUs = () => {
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold text-center text-teal-600 mb-12">
           About Us
@@ -25,7 +25,7 @@ const AboutUs = () => {
             </div>
             <div className="flex justify-center">
               <img
-                src="https://source.unsplash.com/random/400x300/?healthcare,technology"
+                src="health-tech.jpg"
                 alt="Healthcare Technology"
                 className="rounded-xl shadow-lg"
               />
@@ -37,7 +37,7 @@ const AboutUs = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="flex justify-center md:order-2">
               <img
-                src="https://source.unsplash.com/random/400x300/?doctors,medical"
+                src="doctors.webp"
                 alt="Doctors"
                 className="rounded-xl shadow-lg"
               />
@@ -71,7 +71,7 @@ const AboutUs = () => {
             </div>
             <div className="flex justify-center">
               <img
-                src="https://source.unsplash.com/random/400x300/?values,ethics"
+                src="./values.jpg"
                 alt="Values and Ethics"
                 className="rounded-xl shadow-lg"
               />
@@ -83,34 +83,37 @@ const AboutUs = () => {
           <h2 className="text-3xl font-semibold text-teal-600 mb-8">
             Meet the Team
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className=" gap-16 flex flex-wrap">
             {[
               {
-                name: "Dr. Jane Doe",
+                name: "Dipa Ghosh",
                 role: "Chief Medical Officer",
-                image:
-                  "https://source.unsplash.com/random/200x200/?woman,doctor",
+                image: "dipa.jpg",
               },
               {
-                name: "John Smith",
+                name: "Biswarup Naha",
+                role: "Customer Support Lead",
+                image: "me.png",
+              },
+              {
+                name: "Aayush Chatterjee",
                 role: "Lead Developer",
                 image:
                   "https://source.unsplash.com/random/200x200/?man,developer",
               },
               {
-                name: "Alice Johnson",
-                role: "Customer Support Lead",
-                image:
-                  "https://source.unsplash.com/random/200x200/?woman,customer",
-              },
-              {
-                name: "Michael Lee",
+                name: "Arpita Kar",
                 role: "Operations Manager",
                 image:
                   "https://source.unsplash.com/random/200x200/?man,manager",
               },
+              {
+                name: "Suraiya Midda",
+                role: "Human Resource",
+                image: "suraiya.jpg",
+              },
             ].map((teamMember, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="text-center mx-4">
                 <img
                   src={teamMember.image}
                   alt={teamMember.name}
