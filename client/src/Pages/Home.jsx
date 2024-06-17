@@ -20,15 +20,40 @@ console.log(adminData);
 
 const Home = () => {
   const departmentsArray = [
-    "Pediatrics",
-    "Orthopedics",
-    "Cardiology",
-    "Neurology",
-    "Oncology",
-    "Radiology",
-    "Eye Specialist",
-    "Dermatology"
+    {
+      dept: "Pediatrics",
+      img: "pediatrics.jpg",
+    },
+    {
+      dept: "Orthopedics",
+      img: "orthopedics.jpg",
+    },
+    {
+      dept: "Cardiology",
+      img: "cardiology.png",
+    },
+    {
+      dept: "Neurology",
+      img: "neurology.jpg",
+    },
+    {
+      dept: "Oncology",
+      img: "oncology.webp",
+    },
+    {
+      dept: "Radiology",
+      img: "radiology.jpg",
+    },
+    {
+      dept: "Gynaecology",
+      img: "gynae.png",
+    },
+    {
+      dept: "Dermatology",
+      img: "derma.jpg",
+    },
   ];
+
   return (
     <>
       {/* Navbar + Hero Section */}

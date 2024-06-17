@@ -99,13 +99,13 @@ const AboutUs = () => {
                 name: "Aayush Chatterjee",
                 role: "Lead Developer",
                 image:
-                  "https://source.unsplash.com/random/200x200/?man,developer",
+                  "aayush.jpg",
               },
               {
                 name: "Arpita Kar",
                 role: "Operations Manager",
                 image:
-                  "https://source.unsplash.com/random/200x200/?man,manager",
+                  "arpita.jpg",
               },
               {
                 name: "Suraiya Midda",

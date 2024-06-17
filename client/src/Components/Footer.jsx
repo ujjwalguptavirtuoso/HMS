@@ -2,7 +2,7 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <div className="flex justify-around">
+    <div className="flex justify-around pb-7">
       <div className="">
         <h4 className="text-lg font-semibold">Quick Links</h4>
         <ul>
@@ -44,9 +44,9 @@ export const Footer = () => {
           <h6 className="text-slate-600">
             Wednesday&nbsp;&nbsp;&nbsp;10am-11pm
           </h6>
-          <h6 className="text-slate-600">
+          {/* <h6 className="text-slate-600">
             Thursday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11am-9pm
-          </h6>
+          </h6> */}
           <h6 className="text-slate-600">
             Friday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11am-10pm
           </h6>
