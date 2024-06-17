@@ -55,9 +55,9 @@ const AddAdmin = () => {
       <Sidebar />
       <div className="w-full add-admin flex">
         <div className="w-full h-fit pl-7 pt-7 pr-7">
-          <div className="requests w-full h-fit bg-sky-100 rounded-2xl px-5 py-3 mb-5">
+          {/* <div className="requests w-full h-fit bg-sky-100 rounded-2xl px-5 py-3 mb-5">
             <h1 className="font-semibold text-xl">Pending Requests</h1>
-          </div>
+          </div> */}
           <div className="add-admin-form bg-white w-full h-fit rounded-2xl px-5 py-3 flex flex-col items-center">
             <h1 className="font-semibold text-3xl mt-3 mb-5">Add New Admin</h1>
             <div className="w-full h-fit mb-10">

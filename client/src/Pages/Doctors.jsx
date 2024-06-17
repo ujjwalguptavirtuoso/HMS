@@ -5,6 +5,7 @@ import { Context } from "../main";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useNavigate, Link, Navigate } from "react-router-dom";
+import RemoveDoctors from "../Components/RemoveDoctors";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -38,6 +39,14 @@ const Doctors = () => {
           <h1 className="font-semibold text-3xl mb-3">Our Doctors</h1>
         </div>
         <div className="doc-details p-5 flex justify-around flex-wrap">
+      {doctors && doctors.length > 0 ? (
+        doctors.map((element) => (
+          <RemoveDoctors key={element._id} data={element} />
+        ))):(
+          <h1>No Doctors</h1>
+        )}
+      </div>
+        {/* <div className="doc-details p-5 flex justify-around flex-wrap">
           {doctors && doctors.length > 0 ? (
             doctors.map((element) => {
               return (
@@ -63,7 +72,7 @@ const Doctors = () => {
           ) : (
             <h1>No Doctors</h1>
           )}
-        </div>
+        </div> */}
       </section>
     </div>
   );
