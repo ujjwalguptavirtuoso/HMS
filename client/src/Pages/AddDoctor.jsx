@@ -59,10 +59,15 @@ const AddDoctor = () => {
       formData.append("doctorDepartment", doctorDepartment);
       formData.append("avatar", docAvatar);
       await axios
-        .post("http://localhost:8000/api/v1/users/doctor/register", formData, {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-        })
+        .post(
+          // "https://localhost:8000/api/v1/users/admin/add",
+          "https://e-healthcare-management-system-2.onrender.com/api/v1/users/doctor/register",
+          formData,
+          {
+            withCredentials: true,
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        )
         .then((res) => {
           toast.success(res.data.message);
           setIsAuthenticated(true);

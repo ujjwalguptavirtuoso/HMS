@@ -26,8 +26,9 @@ const AddAdmin = () => {
     try {
       await axios
         .post(
-          "http://localhost:8000/api/v1/users/admin/add",
-          { firstName, lastName, email, phone, nic, dob, gender, password, },
+          // "https://localhost:8000/api/v1/users/admin/add",
+          // add the route here and keep the localhost url commented
+          { firstName, lastName, email, phone, nic, dob, gender, password },
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
