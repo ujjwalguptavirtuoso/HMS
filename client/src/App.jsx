@@ -36,8 +36,8 @@ const App = () => {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          // "http://localhost:8000/api/v1/users/patient/profile",
-          "https://e-healthcare-management-system-2.onrender.com/users/patient/profile",
+          "http://localhost:8000/api/v1/users/patient/profile",
+          // "https://e-healthcare-management-system-2.onrender.com/users/patient/profile",
           {
             withCredentials: true,
           }

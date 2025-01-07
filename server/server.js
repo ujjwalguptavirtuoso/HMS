@@ -14,17 +14,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 //middlewares
-// app.use(
-//   cors({
-//     credentials: true,
-//     method: ["GET", "POST", "DELETE", "PUT"],
-//     origin: process.env.CLINET_ORIGIN,
-//   })
-// );
 app.use(
   cors({
-    origin: "https://e-healthcare-management-system-2.onrender.com",
-    // origin: "http://localhost:5173",
+    origin: process.env.CLINET_ORIGIN,
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization",
     credentials: true,

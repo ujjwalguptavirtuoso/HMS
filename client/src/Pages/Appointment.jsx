@@ -21,16 +21,16 @@ const Appointment = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const { data } = await axios.get(
+        const {data} = await axios.get(
           "https://e-healthcare-management-system-2.onrender.com/api/v1/users/doctors",
           {
             withCredentials: true,
           }
         );
-        console.log(data.doctors);
+        // console.log(data.doctors);
         setDoctors(data.doctors);
       } catch (error) {
-        console.log(error.response.data.message);
+        console.error(error.response.data.message);
       }
     };
     fetchDoctors();
@@ -64,10 +64,15 @@ const Appointment = () => {
         <h1 className="font-semibold text-2xl">Our Doctors</h1>
       </div>
       <div className="doc-details p-5 flex justify-around flex-wrap">
-      {doctors && doctors.length > 0 ? (
-        doctors.map((element) => (
-          <AppointDoctors key={element._id} data={element} onClick={handleCardClick} />
-        ))):(
+        {doctors && doctors.length > 0 ? (
+          doctors.map((element) => (
+            <AppointDoctors
+              key={element._id}
+              data={element}
+              onClick={handleCardClick}
+            />
+          ))
+        ) : (
           <h1>No Doctors</h1>
         )}
       </div>
