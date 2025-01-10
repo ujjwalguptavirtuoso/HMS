@@ -8,7 +8,7 @@ export const Navbar = () => {
   const patient = { name: "Patient" };
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-  console.log(Context);
+  // console.log(Context);
 
   // const handleLogout = async () => {
   //   await axios
@@ -36,7 +36,7 @@ export const Navbar = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(res);
+      // console.log(res);
       toast.success(res.data.message);
       setIsAuthenticated(false);
       localStorage.removeItem("authToken"); // Remove token from localStorage
@@ -55,7 +55,7 @@ export const Navbar = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(res);
+      // console.log(res);
       toast.success(res.data.message);
       setIsAuthenticated(false);
       localStorage.removeItem("authToken"); // Remove token from localStorage
@@ -78,7 +78,7 @@ export const Navbar = () => {
     }
   }
   const patientExists = checkPatient();
-  console.log(patientExists);
+  // console.log(patientExists);
   function checkDoctor() {
     const token = localStorage.getItem("doctor");
     if (token) {
@@ -88,7 +88,7 @@ export const Navbar = () => {
     }
   }
   const doctorExists = checkDoctor();
-  console.log(doctorExists);
+  // console.log(doctorExists);
 
   const clickHandler = ()=>{
     {patientExists ?handleLogout():handleLogoutDoctor()}

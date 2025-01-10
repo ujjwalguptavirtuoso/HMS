@@ -16,7 +16,7 @@ function decode(token) {
   }
 }
 const adminData = decode(localStorage.getItem("authToken"));
-console.log(adminData);
+// console.log(adminData);
 
 const Home = () => {
   const departmentsArray = [

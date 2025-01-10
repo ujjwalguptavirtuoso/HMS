@@ -55,9 +55,9 @@ const login = () => {
         "http://localhost:8000/api/v1/users/login",
         { email, password, confirmPassword: password, role: "Patient" },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          // headers: {
+          //   "Content-Type": "application/json",
+          // },
           withCredentials:true,
         }
       );

@@ -71,7 +71,7 @@ export const registerPatient = asyncHandler(async (req, res, next) => {
       password,
     });
 
-  const isRegistered = await User.findOne({ $or: {email, phone} });
+  const isRegistered = await User.findOne({ $or: [{ email: email }, {phone: phone}] });
   if (isRegistered) {
     return next(new ErrorHandler("User already Registered!", 400));
   }
@@ -108,7 +108,7 @@ export const registerAdmin=asyncHandler(async (req,res,next)=>{
       password,
     });
 
-  const isRegistered = await User.findOne({ $or: {email, phone} });
+  const isRegistered = await User.findOne({ $or: [{ email: email }, { phone: phone }] });
   if (isRegistered) {
     return next(new ErrorHandler("Admin already Registered!", 400));
   }
@@ -159,7 +159,7 @@ export const registerDoctor = asyncHandler(async (req, res, next) => {
     password,
   });
 
-  const isRegistered = await User.findOne({ $or: { email, phone } });
+  const isRegistered = await User.findOne({ $or: [{ email: email }, { phone: phone }] });
   if (isRegistered) {
     return next(new ErrorHandler("Doctor already Registered!", 400));
   }

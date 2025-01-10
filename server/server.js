@@ -11,12 +11,13 @@ import cloudinary from "cloudinary";
 import appointmentRouter from "./routes/appoinment.routes.js";
 dotenv.config({ path: "./.env" });
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 //middlewares
 app.use(
   cors({
-    origin: process.env.CLINET_ORIGIN,
+    // origin: process.env.CLINET_ORIGIN,
+    origin: "http://localhost:5173",  
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization",
     credentials: true,
