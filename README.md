@@ -1,56 +1,68 @@
 # E-Healthcare Management System
 
-Welcome to E-Healthcare Management System, a cutting-edge platform designed to revolutionize healthcare delivery and management. Built with the powerful MERN stack, our system ensures a seamless and efficient experience for both healthcare providers and patients.
+Welcome to Aaragya, a cutting-edge platform designed to revolutionize healthcare delivery and management. Built with the powerful MERN stack, our system ensures a seamless and efficient experience for both healthcare providers and patients.
 
-#### **Key Features:**
+1\. Introduction
+----------------
 
-1. **<mark>Patient Management:</mark>**
-    
-    * **<mark>Patient Registration &amp; Profile Management:</mark>** <mark> Easy registration process with secure profile management, ensuring patient data is always up-to-date.</mark>
-        
-    * **<mark>Appointment Scheduling:</mark>** <mark> Simplified appointment booking with automated reminders and real-time availability tracking.</mark>
-        
-    * **<mark>Medical History:</mark>** <mark> Comprehensive records of patient medical history, accessible to authorized healthcare professionals.</mark>
-        
-2. **<mark>Doctor Management:</mark>**
-    
-    * **<mark>Doctor Profiles:</mark>** <mark> Detailed profiles with specialization, availability, and contact information.</mark>
-        
-    * **<mark>Appointment Management:</mark>** <mark> Efficient management of schedules and appointments to maximize patient care.</mark>
-        
-    * **<mark>Communication Tools:</mark>** <mark> Secure messaging system for doctor-patient communication.</mark>
-        
-3. **<mark>Electronic Health Records (EHR):</mark>**
-    
-    * **<mark>Secure Data Storage:</mark>** <mark> HIPAA-compliant storage of medical records, ensuring confidentiality and integrity.</mark>
-        
-    * **<mark>Accessibility:</mark>** <mark> Easy access to patient records for authorized personnel, facilitating better diagnosis and treatment.</mark>
-        
-4. **Billing & Payments:**
-    
-    * **<mark>Automated Billing:</mark>** <mark> Generation of invoices and bills based on services provided.</mark>
-        
-    * **Payment Gateway Integration:** Secure online payment options for hassle-free transactions.
-        
-5. **Analytics & Reporting:**
-    
-    * **Data Analytics:** Insightful analytics for healthcare providers to track patient outcomes, optimize operations, and make informed decisions.
-        
-    * **Custom Reports:** Generate detailed reports for patient care, financials, and system performance.
-        
+### 1.1 Purpose
 
-#### **Technology Stack:**
+The purpose of this document is to provide a comprehensive overview of the requirements for the e-HMS (Electronic Health Management System) website. This system is designed to streamline and manage healthcare services, including patient appointments, doctor schedules, and administrative tasks, with integrated machine learning for health predictions.
 
-* **MongoDB:** Our database solution that stores all patient records, appointments, and other data securely and efficiently.
-    
-* **Express.js:** The back-end framework that powers our application, ensuring fast and reliable server-side operations.
-    
-* **React:** The front-end library that provides a dynamic and responsive user interface, making navigation intuitive and user-friendly.
-    
-* **Node.js:** Our server environment that handles requests and manages communication between the front-end and the database.
-    
+### 1.2 Scope
 
-#### **Benefits:**
+The e-HMS website is a centralized platform built using the MERN stack. It includes three main user modules (Patient, Doctor, Admin) and integrates several machine learning models to predict health conditions. The system supports secure user authentication and data management, cloud-based image storage, and robust form validation.
+
+2\. Screenshots
+---------------
+![1](https://github.com/biswarup-naha/E-healthcare-Management-System/assets/110123267/b63bcbb1-5204-4c41-951c-2e68828a7585)
+![2](https://github.com/biswarup-naha/E-healthcare-Management-System/assets/110123267/4dd31c7f-99e3-4ad1-8b9c-afe166fb2d19)
+![3](https://github.com/biswarup-naha/E-healthcare-Management-System/assets/110123267/33bda2cf-a48d-4d35-85d9-06801aab7abb)
+
+
+
+
+3\. Description
+-----------------------
+
+### 3.1 Product Perspective
+
+The e-HMS website is designed to be a standalone application that integrates various aspects of healthcare management. It provides a unified platform for patients, doctors, and administrators, enabling seamless interaction and data management.
+
+### 3.2 Product Features
+
+-   **Patient Module**: Appointment booking, dashboard for viewing appointment status.
+-   **Doctor Module**: Personalized dashboard for managing appointments (accept/reject).
+-   **Admin Module**: User management (add/remove doctors and admins), query handling.
+-   **Frontend**: UI is developed using React and tailwindCSS.
+-   **Backend**: The native server is built using Node and Express with RESTful API design.
+-   **Machine Learning Models**: Predictive analytics for heart disease, diabetes, and thyroid conditions.
+-   **Secure Authentication**: Stateful JWT for managing user sessions.
+-   **Cloud Storage**: Cloudinary for managing image uploads.
+-   **Form Validation**: Zod for validating user inputs.
+-   **Database**: MongoDB for storing user and appointment data.
+
+### 3.3 User Classes and Characteristics
+
+-   **Patients**: Users who can book appointments and view their status. They require an intuitive interface and easy navigation.
+-   **Doctors**: Users who manage appointments. They need a personalized dashboard to efficiently accept or reject appointments.
+-   **Admins**: Users who manage the system, including adding/removing doctors and handling user queries. They need access to comprehensive user management tools.
+
+### 3.4 Operating Environment
+
+-   **Frontend**: React.js, compatible with modern web browsers.
+-   **Backend**: Node.js with Express.js, hosted on a server or cloud platform.
+-   **Database**: MongoDB, either locally hosted or cloud-based (e.g., MongoDB Atlas).
+-   **Cloud Storage**: Cloudinary for image storage.
+-   **Machine Learning API**: Flask-based API for model integration.
+
+### 3.5 Design and Implementation Constraints
+
+-   **Scalability**: The system should be designed to handle a growing number of users and data.
+-   **Security**: Data must be protected with secure authentication and storage practices.
+-   **Performance**: The system should provide quick responses and minimal downtime.            
+
+### 3.6 **Benefits:**
 
 * **Enhanced Patient Care:** Streamlined processes and easy access to medical records improve patient outcomes.
     
