@@ -25,14 +25,14 @@ The e-HMS website is a centralized platform built using the MERN stack. It inclu
 
 
 
-3\. Description
+2\. Description
 -----------------------
 
-### 3.1 Product Perspective
+### 2.1 Product Perspective
 
 The e-HMS website is designed to be a standalone application that integrates various aspects of healthcare management. It provides a unified platform for patients, doctors, and administrators, enabling seamless interaction and data management.
 
-### 3.2 Product Features
+### 2.2 Product Features
 
 -   **Patient Module**: Appointment booking, dashboard for viewing appointment status.
 -   **Doctor Module**: Personalized dashboard for managing appointments (accept/reject).
@@ -45,13 +45,13 @@ The e-HMS website is designed to be a standalone application that integrates var
 -   **Form Validation**: Zod for validating user inputs.
 -   **Database**: MongoDB for storing user and appointment data.
 
-### 3.3 User Classes and Characteristics
+### 2.3 User Classes and Characteristics
 
 -   **Patients**: Users who can book appointments and view their status. They require an intuitive interface and easy navigation.
 -   **Doctors**: Users who manage appointments. They need a personalized dashboard to efficiently accept or reject appointments.
 -   **Admins**: Users who manage the system, including adding/removing doctors and handling user queries. They need access to comprehensive user management tools.
 
-### 3.4 Operating Environment
+### 2.4 Operating Environment
 
 -   **Frontend**: React.js, compatible with modern web browsers.
 -   **Backend**: Node.js with Express.js, hosted on a server or cloud platform.
@@ -59,13 +59,13 @@ The e-HMS website is designed to be a standalone application that integrates var
 -   **Cloud Storage**: Cloudinary for image storage.
 -   **Machine Learning API**: Flask-based API for model integration.
 
-### 3.5 Design and Implementation Constraints
+### 2.5 Design and Implementation Constraints
 
 -   **Scalability**: The system should be designed to handle a growing number of users and data.
 -   **Security**: Data must be protected with secure authentication and storage practices.
 -   **Performance**: The system should provide quick responses and minimal downtime.            
 
-### 3.6 **Benefits:**
+### 2.6 **Benefits:**
 
 * **Enhanced Patient Care:** Streamlined processes and easy access to medical records improve patient outcomes.
     
