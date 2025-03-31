@@ -117,14 +117,17 @@ export const Navbar = () => {
             <Link to={"/"}>Home</Link>
           </li>
           <li>
-            <Link to={"/appointment"}>Appointment</Link>
+            <Link to={"/appointment"}>Chat with Curesync AI</Link>
           </li>
           <li>
+            <Link to={"/appointment"}>Appointment</Link>
+          </li>
+          {/* <li>
             <Link to={"/aboutus"}>About us</Link>
           </li>
           <li>
             <Link to={"/quick-help"}>Quick Help</Link>
-          </li>
+          </li> */}
         </ul>
       </div>
       {isAuthenticated ? (
@@ -150,14 +153,20 @@ export const Navbar = () => {
       ) : (
         <div className="flex">
           <button
-            className="w-32 h-10 bg-[#76dbcf] rounded-2xl font-semibold mr-3"
+            className="w-36 h-12 bg-[#76dbcf] rounded-2xl font-semibold mr-3"
             onClick={goToRegister}
           >
-            REGISTER
+            REGISTER FOR DOCTOR
+          </button>
+          <button
+            className="w-36 h-12 bg-[#76dbcf] rounded-2xl font-semibold mr-3"
+            onClick={goToRegister}
+          >
+            REGISTER FOR PATIENT
           </button>
           <div>
             <button
-              className=" realtive w-32 h-10 bg-[#76dbcf] rounded-2xl font-semibold"
+              className=" realtive w-36 h-12 bg-[#76dbcf] rounded-2xl font-semibold"
               onClick={() => setIsOpen((prev) => !prev)}
             >
               LOGIN

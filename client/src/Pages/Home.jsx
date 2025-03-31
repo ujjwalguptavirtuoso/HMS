@@ -61,10 +61,10 @@ const Home = () => {
         <Navbar />
         <div className="hero w-full flex items-center px-20">
           <div className="hero-pic w-1/2 flex justify-center">
-            <img className="w-1/2" src="/hero-pic.png" alt="" />
+            <img className="w-1/2" src="/doctor-patient.png" alt="" />
           </div>
           <div className="hero-text w-1/2 flex flex-col items-center ">
-            <h1 className="font-semibold text-4xl">We are Aaragya</h1>
+            <h1 className="font-semibold text-4xl">We are CureSync</h1>
             <h1 className="text-3xl">We are here to provide world</h1>
             <h1 className="text-3xl">class healthcare for everyone</h1>
           </div>
