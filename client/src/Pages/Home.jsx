@@ -57,7 +57,7 @@ const Home = () => {
   return (
     <>
       {/* Navbar + Hero Section */}
-      <div className="sec-1 w-full h-fit bg-gradient-to-tl from-[#76dbcf]">
+      {/* <div className="sec-1 w-full h-fit bg-gradient-to-tl from-[#76dbcf]">
         <Navbar />
         <div className="hero w-full flex items-center px-20">
           <div className="hero-pic w-1/2 flex justify-center">
@@ -69,39 +69,24 @@ const Home = () => {
             <h1 className="text-3xl">class healthcare for everyone</h1>
           </div>
         </div>
-      </div>
+      </div> */}
+{/* Navbar + Hero Section */}
+<div className="sec-1 w-full h-fit bg-gradient-to-tl from-[#76dbcf]">
+  <Navbar />
+  <div className="hero max-w-screen-2xl w-full flex items-center px-32 py-16 mx-auto">
+    <div className="hero-pic w-2/5 flex justify-center">
+      <img className="w-3/4 lg:w-4/5" src="/doctor-patient.png" alt="Doctor with Patient" />
+    </div>
+    <div className="hero-text w-3/5 flex flex-col items-center text-center space-y-4">
+      <h1 className="font-bold text-5xl">We are CureSync</h1>
+      <h1 className="text-4xl">We are here to provide world</h1>
+      <h1 className="text-4xl">class healthcare for everyone</h1>
+    </div>
+  </div>
+</div>
 
-      {/* Departments section */}
-      <div className="sec-2 w-full h-fit p-5 bg-gradient-to-t from-[#76dbcf] to-[#d0f7f3]">
-        <div className="department-head flex justify-center mt-3">
-          <h1 className="text-3xl font-semibold">
-            Find Doctors By Your Health Concern
-          </h1>
-        </div>
-        <div className="departments w-full h-fit px-20 mt-9 flex flex-wrap flex-shrink-0 justify-around">
-          {departmentsArray.map((depart, index) => {
-            return (
-              <div
-                //className="departments w-full h-fit px-20 mt-9 flex flex-wrap flex-shrink-0 justify-around"
-                value={depart}
-                key={index}
-              >
-                <Department data={depart} />
-              </div>
-            );
-          })}
-        </div>
-        {/* <div className="departments w-full h-fit px-20 mt-9 flex flex-wrap flex-shrink-0 justify-around">
-          <Department data={"Dermatology"} />
-          <Department data={"Cadiology"} />
-          <Department data={"Neurology"} />
-          <Department data={"Orthopedics"} />
-          <Department data={"Onchology"} />
-          <Department data={"Eye Specialist"} />
-          <Department data={"ENT Specialist"} />
-          <Department data={"Radiology"} />
-        </div> */}
-      </div>
+
+
       <ChatBubble />
       {/* Message Section + footer */}
       <div className="sec-3 w-full h-fit bg-gradient-to-b from-[#76dbcf] to-[#d0f7f3] pb-5">

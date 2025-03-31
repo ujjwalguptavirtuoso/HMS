@@ -20,15 +20,15 @@ export const Footer = () => {
               alt=""
               className="w-4 h-4"
             />
-            <h6 className="text-slate-600">&nbsp;9999999999</h6>
+            <h6 className="text-slate-600">&nbsp;+1-413-111-1111</h6>
           </li>
           <li className="flex items-center">
             <img src="/email.png" alt="" className="w-4 h-4" />
-            <h6 className="text-slate-600">&nbsp;name@gmail.com</h6>
+            <h6 className="text-slate-600">&nbsp;curesync@umass.edu</h6>
           </li>
           <li className="flex items-center">
             <img src="/pin.png" alt="" className="w-4 h-4" />
-            <h6 className="text-slate-600">&nbsp;Burdwan,WB</h6>
+            <h6 className="text-slate-600">&nbsp;Amherst,MA</h6>
           </li>
         </ul>
       </div>
