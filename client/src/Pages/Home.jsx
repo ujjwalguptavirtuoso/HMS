@@ -71,7 +71,8 @@ const Home = () => {
         </div>
       </div> */}
 {/* Navbar + Hero Section */}
-<div className="sec-1 w-full h-fit bg-gradient-to-tl from-[#76dbcf]">
+<div className="sec-1 w-full h-fit bg-gradient-to-tr from-cyan-300 to-green-200">
+
   <Navbar />
   <div className="hero max-w-screen-2xl w-full flex items-center px-32 py-16 mx-auto">
     <div className="hero-pic w-2/5 flex justify-center">
@@ -89,7 +90,8 @@ const Home = () => {
 
       <ChatBubble />
       {/* Message Section + footer */}
-      <div className="sec-3 w-full h-fit bg-gradient-to-b from-[#76dbcf] to-[#d0f7f3] pb-5">
+      <div className="sec-1 w-full h-fit bg-gradient-to-tr from-cyan-300 to-green-200">
+
         <div className="department-head flex justify-center">
           <h1 className="text-3xl font-semibold mt-1">Send Us A Message</h1>
         </div>

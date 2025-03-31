@@ -7,8 +7,8 @@ export const Footer = () => {
         <h4 className="text-lg font-semibold">Quick Links</h4>
         <ul>
           <h6 className="text-slate-600">Home</h6>
-          <h6 className="text-slate-600">Appointment</h6>
-          <h6 className="text-slate-600">About us</h6>
+          <h6 className="text-slate-600">Appointments</h6>
+          <h6 className="text-slate-600">Chat with CureSync AI</h6>
         </ul>
       </div>
       <div className="">
